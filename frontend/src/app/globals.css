@@ -122,6 +122,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -132,40 +133,27 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 .links {
   font-family: roboto;
   font-size: 16px;
   font-weight: 400;
   color: white;
 }
-header, .hero {
+
+header,
+.hero {
   background: linear-gradient(90deg, #E53023 0%, #345CA7 100%);
 }
 
 h2 {
-  /* font-family: archivo-black !important; */
-  font-size: 45px;
   line-height: 100%;
   color: black;
   font-weight: 900;
   text-transform: uppercase;
-}
-.h2 {
-  /* font-family: archivo-black !important; */
-  font-size: 45px;
-  line-height: 100%;
-  color: white !important;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-.services {
-  font-size: 22px;
-  font-weight: 900;
-  line-height: 100%;
-  text-transform: uppercase;
-  color: black;
-  margin-left: 1.6vw;
-  margin-top: 2.5vh;
 }
 
 /* Pagination dot styles */
@@ -187,15 +175,96 @@ h2 {
 .navigation {
   background-color: #345CA7 !important;
 }
+
 .navigation:hover {
   background-color: #E53023 !important;
   cursor: pointer;
 }
-input, textarea {
+
+input,
+textarea {
   border: 1px solid #DADEE7;
   border-radius: 184px;
   background-color: white;
 }
+
 textarea {
   border-radius: 10px !important;
+}
+
+.h2 {
+  line-height: 100%;
+  color: white !important;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.services {
+  font-weight: 900;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: black;
+  margin-left: 1.6vw;
+  margin-top: 2.5vh;
+}
+
+@media screen and (min-width: 1537px) {
+
+  h2,
+  .h2 {
+    font-size: 45px !important;
+  }
+
+  .services {
+    font-size: 22px !important;
+  }
+}
+
+@media screen and (max-width: 1536px) {
+
+  h2,
+  .h2 {
+    font-size: 40px !important;
+  }
+
+  .services {
+    font-size: 20px !important;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+
+  h2,
+  .h2 {
+    font-size: 36px !important;
+  }
+
+  .services {
+    font-size: 16px !important;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+
+  h2,
+  .h2 {
+    font-size: 32px !important;
+  }
+  .services {
+    font-size: 20px !important;
+    margin-right: 3.5vw !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  h2,
+  .h2 {
+    font-size: 28px !important;
+  }
+  .services {
+    margin-right: 6vw !important;
+    margin-left: 6vw;
+    margin-top: 0vh !important;
+  }
 }

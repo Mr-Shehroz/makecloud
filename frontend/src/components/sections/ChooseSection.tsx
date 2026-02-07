@@ -54,7 +54,7 @@ const ChooseSection = () => {
   }, [api])
 
   return (
-    <section className='py-[12vh]'>
+    <section className='md:py-[12vh] py-[8vh]'>
       <div>
         <div className='w-full max-w-[689px] mx-auto mb-[4.3vh]'>
           <h2 className='font-normal font-archivo-black text-center'>
@@ -82,10 +82,10 @@ const ChooseSection = () => {
                     className="basis-auto flex justify-center overflow-hidden"
                   >
                     <div 
-                      className={`relative rounded-[20px] overflow-hidden transition-all duration-700 delay-200 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                      className={`relative rounded-[20px] px-4 md:px-0 overflow-hidden transition-all duration-700 delay-200 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                         isCenter 
-                          ? 'w-[742px] h-[344px] scale-100' 
-                          : 'w-[670px] h-[290px] scale-100'
+                          ? 'xl:w-[742px] xl:h-[344px] lg:w-[600px] md:w-[500px] md:h-[300px] w-[75%] h-[400px] scale-100' 
+                          : 'xl:w-[670px] xl:h-[290px] lg:w-[560px] w-[460px] h-[230px] scale-100'
                       }`}
                     >
                       {/* Background Image */}
@@ -96,21 +96,21 @@ const ChooseSection = () => {
                       
                       {/* Content - Only visible when centered */}
                       {isCenter && (
-                        <div className="relative h-full flex flex-col justify-end p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                          <div className="bg-white rounded-[20px] pl-3.5 pr-6 py-4 shadow-lg w-[651px] h-[110px] flex flex-col">
-                            <div className="flex items-start gap-4">
+                        <div className="relative h-full flex flex-col items-center justify-end p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                          <div className="bg-white rounded-[20px] pl-3.5 pr-6 py-4 shadow-lg xl:w-[651px] xl:h-[110px] lg:w-[500px] md:w-[440px] w-[60%] lg:h-[100px] flex flex-col">
+                            <div className="flex items-start lg:gap-4 gap-2">
                               {/* Icon */}
-                              <div className="flex-shrink-0 w-[70px] h-[70px] bg-[#E53023] rounded-full flex items-center justify-center text-white">
+                              <div className="flex-shrink-0 xl:w-[70px] xl:h-[70px] lg:h-[50px] lg:w-[50px] w-[40px] h-[40px] bg-[#E53023] rounded-full flex items-center justify-center text-white">
                                 {/* FIXED: Remove template string error and forward icon path correctly */}
-                                <Image src={item.icon} height={45} width={45} alt="icon" className='w-[45px] h-auto' unoptimized />
+                                <Image src={item.icon} height={45} width={45} alt="icon" className='xl:w-[45px] lg:w-[35px] w-[25px] h-auto' unoptimized />
                               </div>
                               
                               {/* Text Content */}
                               <div className="flex-1">
-                                <h3 className="font-normal font-archivo-black text-[22px] leading-[100%] text-black mb-3.5 uppercase">
+                                <h3 className="font-normal font-archivo-black xl:text-[22px] md:text-[18px] text-[16px] leading-[100%] text-black xl:mb-3.5 mb-2 uppercase">
                                   {item.title}
                                 </h3>
-                                <p className="text-black text-[18px] font-roboto leading-[100%]">
+                                <p className="text-black xl:text-[18px] lg:text-[16px] text-[14px] font-roboto leading-[100%]">
                                   {item.description}
                                 </p>
                               </div>
@@ -130,7 +130,7 @@ const ChooseSection = () => {
           </Carousel>
           
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-[2.5vh] overflow-visible">
+          <div className="flex justify-center gap-2 mt-[2.5vh] overflow-visible"> 
             {carouselData.map((_, index) => ( 
               <button
                 key={index}
