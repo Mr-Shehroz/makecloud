@@ -161,7 +161,7 @@ const FooterSection = () => {
                                 <Input
                                     type='email'
                                     placeholder='Email here'
-                                    className='bg-white border-none rounded-full px-6 py-6 text-gray-800 text-[18px] font-roboto placeholder:font-roboto placeholder:text-black placeholder:text-[18px] text-[18px] placeholder:text-normal leading-[100%] w-[268px] h-[43px]'
+                                    className='bg-white border-none rounded-full px-6 py-6 text-gray-800 font-roboto placeholder:font-roboto placeholder:text-black placeholder:text-[18px] text-[18px] placeholder:text-normal leading-[100%] w-[268px] h-[43px]'
                                 />
                                 <Button
                                     className='bg-red-500 hover:bg-red-600 text-white font-semibold rounded-full w-[268px] h-[43px] cursor-pointer'

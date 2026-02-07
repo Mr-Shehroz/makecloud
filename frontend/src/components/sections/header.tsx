@@ -30,7 +30,7 @@ const Header = () => {
                 </div>
                 <div className='flex flex-col gap-0'>
                     <h5 className='links'>+91-234-567-8900</h5>
-                    <h4 className='font-normal text-[20px] font-archivo-black'>Free Consultant</h4>
+                    <h4 className='font-normal text-[20px] font-archivo-black text-white'>Free Consultant</h4>
                 </div>
             </div>
         </header>

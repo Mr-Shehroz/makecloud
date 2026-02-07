@@ -1,25 +1,15 @@
 import type { Metadata } from "next";
 import { Archivo_Black, DM_Sans, Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/global/ThemeProvider";
 import { ThemeToggle } from "@/components/global/ThemeToggle";
-// Import the PostHogProvider
-import { PostHogProvider } from "@/components/PostHogProvider";
-// Import the GoogleAnalytics component
 import { GoogleAnalytics } from "@/components/global/GoogleAnalytics";
 import { getDictionary } from "@/i18n/getDictionary";
 import { i18n } from "@/i18n/i18n-config";
+import Header from "@/components/sections/header";
+import FooterSection from "@/components/sections/FooterSection";
+import Branding from "@/components/sections/branding";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
 const roboto = Roboto({
 	variable: "--font-roboto",
 	subsets: ["latin"],
@@ -58,15 +48,10 @@ export default async function RootLayout({
 			<body
 				className={`${archivo_black.variable} ${roboto.variable} ${dm_sans.variable} antialiased`}
 				>
-				<PostHogProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+			<Branding />
+			<Header />
             {children}
-            <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
-              <ThemeToggle />
-            </div>
-            <Toaster position="top-center" />
-          </ThemeProvider>
-				</PostHogProvider>
+			<FooterSection />
 			</body>
 		</html>
 	);
