@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
 import { Archivo_Black, DM_Sans, Roboto } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@/components/global/GoogleAnalytics";
-import { getDictionary } from "@/i18n/getDictionary";
-import { i18n } from "@/i18n/i18n-config";
-import Header from "@/components/sections/header";
-import FooterSection from "@/components/sections/FooterSection";
-import Branding from "@/components/sections/branding";
+import FooterSectionContainer from "@/components/FooterSectionContainer";
+import HeaderContainer from "@/components/HeaderContainer";
 
 const roboto = Roboto({
 	variable: "--font-roboto",
@@ -24,14 +20,6 @@ const dm_sans = DM_Sans({
 	weight: ["400","500"]
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-	const dictionary = await getDictionary(i18n.defaultLocale);
-	return {
-		title: dictionary.app.title,
-		description: dictionary.app.description,
-	};
-}
-
 export default async function RootLayout({
 	children,
 }: {
@@ -46,10 +34,9 @@ export default async function RootLayout({
 			<body
 				className={`${archivo_black.variable} ${roboto.variable} ${dm_sans.variable} antialiased`}
 				>
-			<Branding />
-			<Header />
+			<HeaderContainer />
             {children}
-			<FooterSection />
+			<FooterSectionContainer />
 			</body>
 		</html>
 	);

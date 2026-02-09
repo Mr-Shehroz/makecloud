@@ -112,12 +112,6 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
-@theme inline {
-  --font-roboto: var(--font-roboto);
-  --font-archivo-black: var(--font-archivo-black);
-  --font-dm-sans: var(--font-dm-sans);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,6 +120,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@theme inline {
+  --font-roboto: var(--font-roboto);
+  --font-archivo-black: var(--font-archivo-black);
+  --font-dm-sans: var(--font-dm-sans);
 }
 
 body {
@@ -139,7 +139,7 @@ html {
 
 .links {
   font-family: roboto;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   color: white;
 }
@@ -179,6 +179,7 @@ h2 {
 .navigation:hover {
   background-color: #E53023 !important;
   cursor: pointer;
+  color: white;
 }
 
 input,
@@ -250,6 +251,7 @@ textarea {
   .h2 {
     font-size: 32px !important;
   }
+
   .services {
     font-size: 20px !important;
     margin-right: 3.5vw !important;
@@ -262,9 +264,30 @@ textarea {
   .h2 {
     font-size: 28px !important;
   }
+
   .services {
     margin-right: 6vw !important;
     margin-left: 6vw;
     margin-top: 0vh !important;
   }
+}
+
+@media screen and (max-width: 400px) {
+  .date {
+    top: -18vh !important;
+  }
+}
+@media screen and (max-width: 350px) {
+  .date {
+    top: -16vh !important;
+  }
+  .title {
+    top: 2vh !important;
+  }
+}
+
+input, textarea {
+  font-family: roboto;
+  font-size: 18px !important;
+  font-weight: 400;
 }

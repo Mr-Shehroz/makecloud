@@ -1,319 +1,103 @@
-import {
-  MenuIcon,
-  InfoOutlineIcon,
-  ComponentIcon,
-  LinkIcon,
-} from "@sanity/icons";
-import { defineField, defineType, defineArrayMember, type ValidationContext, type Reference } from "sanity";
-import { fields, groups, documents, descriptions, validation, sanityOptions } from "../dictionary";
+// schemas/header.ts
+import { defineType, defineField, defineArrayMember } from 'sanity'
 
-export const header = defineType({
-  name: "header",
-  title: documents.header,
-  type: "document",
-  icon: MenuIcon,
-  groups: [
-    {
-      name: "basic",
-      title: groups.basic,
-      icon: InfoOutlineIcon,
-      default: true,
-    },
-    {
-      name: "appearance",
-      title: groups.appearance,
-      icon: ComponentIcon,
-    },
-    {
-      name: "navigation",
-      title: "Navegação",
-      icon: MenuIcon,
-    },
-    {
-      name: "actions",
-      title: groups.actions,
-      icon: LinkIcon,
-    },
-  ],
+export default defineType({
+  name: 'header',
+  title: 'Header',
+  type: 'document',
   fields: [
+    // Logo (optional - can reuse from Branding or have separate)
     defineField({
-      name: "language",
-      type: "string",
-      readOnly: true,
-      hidden: true,
-    }),
-    defineField({
-      name: "title",
-      title: fields.siteName,
-      type: "string",
-      description: descriptions.siteNameDescription,
-      validation: (rule) =>
-        rule.required().error(validation.siteNameRequired),
-      group: "basic",
-    }),
-    defineField({
-      name: "logo",
-      title: fields.logo,
-      type: "image",
-      description: descriptions.logoDescription,
+      name: 'logo',
+      title: 'Logo',
+      type: 'file',
       options: {
-        hotspot: true,
+        accept: 'image/svg+xml,image/png,image/jpeg',
       },
-      fields: [
-        defineField({
-          name: "alt",
-          title: fields.alt,
-          type: "string",
-          description: descriptions.logoAltDescription,
-          validation: (rule) =>
-            rule.custom((value, context: ValidationContext) => {
-              const parent = context.parent as { asset?: Reference };
-              if (parent?.asset && !value) {
-                return validation.logoAltRequiredHeader;
-              }
-              return true;
-            }),
-        }),
-      ],
-      group: "basic",
+      description: 'Upload logo (SVG recommended)',
     }),
+
+    // Navigation Links
     defineField({
-      name: "variant",
-      title: fields.variant,
-      type: "string",
-      description: descriptions.headerVariantDescription,
-      options: {
-        list: sanityOptions.headerVariants,
-        layout: "radio",
-      },
-      initialValue: "default",
-      group: "appearance",
-    }),
-    defineField({
-      name: "navigationItems",
-      title: fields.navigationItems,
-      type: "array",
-      group: "navigation",
+      name: 'navigation',
+      title: 'Navigation Links',
+      type: 'array',
+      description: 'Add navigation items in order (max 5 recommended)',
       of: [
         defineArrayMember({
-          type: "object",
-          name: "navigationItem",
-          title: descriptions.defaultNavigationItem,
+          type: 'object',
+          title: 'Navigation Item',
           fields: [
             defineField({
-              name: "title",
-              title: fields.title,
-              type: "string",
-              validation: (rule) =>
-                rule.required().error(validation.navigationTitleRequired),
+              name: 'label',
+              title: 'Link Label',
+              type: 'string',
+              validation: (Rule) => Rule.required().min(2).max(50),
             }),
             defineField({
-              name: "href",
-              title: fields.href,
-              type: "url",
-              description: descriptions.navigationItemsDescription,
-              validation: (rule) =>
-                rule
-                  .uri({
-                    allowRelative: true,
-                    scheme: ["http", "https", "mailto", "tel"],
-                  })
-                  .error(validation.navigationUrlInvalid),
+              name: 'url',
+              title: 'URL',
+              type: 'string',
+              description: 'Internal link (e.g., /services) or external URL',
+              validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: "description",
-              title: fields.description,
-              type: "text",
-              description: descriptions.navigationDescriptionText,
-              validation: (rule) =>
-                rule.max(150).warning(validation.navigationDescriptionWarning),
+              name: 'hasDropdown',
+              title: 'Has Dropdown Menu?',
+              type: 'boolean',
+              initialValue: false,
             }),
             defineField({
-              name: "items",
-              title: fields.items,
-              type: "array",
-              description: descriptions.dropdownItemsDescription,
+              name: 'dropdownItems',
+              title: 'Dropdown Items',
+              type: 'array',
+              hidden: ({ parent }) => !parent?.hasDropdown,
               of: [
                 defineArrayMember({
-                  type: "object",
-                  name: "subItem",
-                  title: descriptions.defaultSubitem,
+                  type: 'object',
                   fields: [
                     defineField({
-                      name: "title",
-                      title: fields.title,
-                      type: "string",
-                      validation: (rule) =>
-                        rule.required().error(validation.subitemTitleRequired),
+                      name: 'label',
+                      title: 'Item Label',
+                      type: 'string',
+                      validation: (Rule) => Rule.required().min(2).max(50),
                     }),
                     defineField({
-                      name: "href",
-                      title: fields.href,
-                      type: "url",
-                      validation: (rule) =>
-                        rule
-                          .required()
-                          .error(validation.subitemUrlRequired)
-                          .uri({
-                            allowRelative: true,
-                            scheme: ["http", "https", "mailto", "tel"],
-                          })
-                          .error(validation.subitemUrlInvalid),
+                      name: 'url',
+                      title: 'Item URL',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
                     }),
                   ],
-                  preview: {
-                    select: {
-                      title: "title",
-                      subtitle: "href",
-                    },
-                    prepare({ title, subtitle }) {
-                      return {
-                        title: title || descriptions.defaultSubitem,
-                        subtitle: subtitle || descriptions.linkNotDefined,
-                        media: LinkIcon,
-                      };
-                    },
-                  },
                 }),
               ],
             }),
           ],
-          preview: {
-            select: {
-              title: "title",
-              href: "href",
-              itemCount: "items.length",
-            },
-            prepare({ title, href, itemCount = 0 }) {
-              const isDropdown = itemCount > 0;
-              let subtitle = "";
-              
-              if (isDropdown) {
-                const plural = itemCount === 1 ? "" : "s";
-                subtitle = descriptions.dropdownWithItems
-                  .replace("{count}", itemCount.toString())
-                  .replace("{plural}", plural);
-              } else if (href) {
-                subtitle = descriptions.linkTo.replace("{url}", href);
-              } else {
-                subtitle = descriptions.noLinkDropdownOnly;
-              }
-              
-              return {
-                title: title || descriptions.defaultNavigationItem,
-                subtitle,
-                media: MenuIcon,
-              };
-            },
-          },
         }),
       ],
     }),
+
+    // Contact Information
     defineField({
-      name: "ctaButtons",
-      title: fields.ctaButtons,
-      type: "array",
-      description: descriptions.ctaButtonsDescription,
-      group: "actions",
-      of: [
-        defineArrayMember({
-          type: "object",
-          name: "button",
-          title: descriptions.defaultCtaButton,
-          fields: [
-            defineField({
-              name: "label",
-              title: fields.label,
-              type: "string",
-              validation: (rule) =>
-                rule
-                  .required()
-                  .error(validation.ctaButtonLabelRequired)
-                  .max(30)
-                  .warning(validation.ctaButtonLabelWarning),
-            }),
-            defineField({
-              name: "url",
-              title: fields.url,
-              type: "url",
-              validation: (rule) =>
-                rule
-                  .required()
-                  .error(validation.ctaButtonUrlRequired)
-                  .uri({
-                    allowRelative: true,
-                    scheme: ["http", "https", "mailto", "tel"],
-                  })
-                  .error(validation.ctaButtonUrlInvalid),
-            }),
-            defineField({
-              name: "variant",
-              title: fields.buttonVariant,
-              type: "string",
-              options: {
-                list: sanityOptions.headerButtonVariants,
-              },
-              initialValue: "default",
-            }),
-          ],
-          preview: {
-            select: {
-              title: "label",
-              subtitle: "url",
-              variant: "variant",
-            },
-            prepare({ title, subtitle, variant }) {
-              const selectedVariant = sanityOptions.headerButtonVariants.find(v => v.value === variant);
-              const variantTitle = selectedVariant ? selectedVariant.title : variant;
-              return {
-                title: title || descriptions.defaultCtaButton,
-                subtitle: `${variantTitle || descriptions.defaultLayout} | ${subtitle || descriptions.urlNotDefinedHeader}`,
-                media: LinkIcon,
-              };
-            },
-          },
+      name: 'contactInfo',
+      title: 'Contact Information',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'phoneNumber',
+          title: 'Phone Number',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+          description: 'e.g., +91-234-567-8900',
+        }),
+        defineField({
+          name: 'consultantText',
+          title: 'Consultant Text',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+          initialValue: 'Free Consultant',
         }),
       ],
-    }),
-    defineField({
-      name: "dropdownCTALabel",
-      title: fields.dropdownCTALabel,
-      type: "string",
-      description: descriptions.dropdownCtaLabelDescription,
-      initialValue: descriptions.defaultScheduleCall,
-      group: "actions",
-      validation: (rule) =>
-        rule.max(40).warning(validation.dropdownCtaLabelWarning),
-    }),
-    defineField({
-      name: "dropdownCTAUrl",
-      title: fields.dropdownCTAUrl,
-      type: "url",
-      description: descriptions.dropdownCtaUrlDescription,
-      initialValue: descriptions.defaultContactPath,
-      group: "actions",
-      validation: (rule) =>
-        rule
-          .uri({
-            allowRelative: true,
-            scheme: ["http", "https", "mailto", "tel"],
-          })
-          .error(validation.dropdownCtaUrlInvalid),
     }),
   ],
-  preview: {
-    select: {
-      title: "title",
-      variant: "variant",
-    },
-    prepare({ title, variant }) {
-      const selectedVariant = sanityOptions.headerVariants.find(v => v.value === variant);
-      const variantTitle = selectedVariant ? selectedVariant.title : variant;
-      return {
-        title: title || descriptions.defaultHeader,
-        subtitle: variantTitle || descriptions.defaultLayout,
-        media: MenuIcon,
-      };
-    },
-  },
-});
+})

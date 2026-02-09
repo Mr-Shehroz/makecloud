@@ -13,108 +13,31 @@ export const client = createClient({
 	useCdn: false,
 });
 
-// Initialize image URL builder
-const builder = imageUrlBuilder(client);
+// Image URL builder
+const builder = imageUrlBuilder(client)
 
-// Helper function to generate image URLs
-export const urlFor = (source: SanityImageSource) => {
-	return builder.image(source);
-};
-
-// Unified query to get translation metadata by either document ID or slug
-const TRANSLATION_METADATA_QUERY = defineQuery(`*[
-  _type == "translation.metadata" 
-  && (
-    ($documentId != null && translations[].value._ref == $documentId) ||
-    ($slug != null && references(*[
-      _type in ["page", "blogPost", "author", "category"] 
-      && slug.current == $slug
-      && language == $currentLanguage
-    ][0]._id))
-  )
-][0]{
-  translations[]{
-    _key,
-    value->{
-      _id,
-      _type,
-      slug,
-      language,
-      title
-    }
+// Helper function to get file URL from Sanity asset
+export const getFileUrl = (asset: any): string => {
+  if (!asset?.asset?._ref) return ''
+  
+  const ref = asset.asset._ref
+  
+  // Format: file-{id}-{extension} or image-{id}-{dimensions}-{format}
+  const parts = ref.split('-')
+  
+  // Handle file assets (SVG, etc.)
+  if (ref.startsWith('file-')) {
+    // file-{assetId}-{extension}
+    const assetId = parts.slice(1, -1).join('-')
+    const extension = parts[parts.length - 1]
+    return `https://cdn.sanity.io/files/${projectId}/${dataset}/${assetId}.${extension}`
   }
-}`);
-
-interface TranslationValue {
-  _id: string;
-  _type: string;
-  slug: { current: string };
-  language: string;
-  title?: string;
-}
-
-interface Translation {
-  _key: string;
-  value: TranslationValue;
-}
-
-interface TranslationMetadata {
-  translations: Translation[];
-}
-
-// Unified helper function for all translation needs
-export async function getTranslationMetadata(params: {
-  documentId?: string;
-  slug?: string;
-  currentLanguage?: string;
-}): Promise<{
-  translations: Translation[];
-  getUrlsMap: () => Record<string, string>;
-  findTranslationByLanguage: (targetLanguage: string) => Translation | undefined;
-}> {
-  try {
-    const data = await client.fetch<TranslationMetadata | null>(TRANSLATION_METADATA_QUERY, {
-      documentId: params.documentId || null,
-      slug: params.slug || null,
-      currentLanguage: params.currentLanguage || null,
-    });
-
-    const translations = data?.translations || [];
-
-    return {
-      translations,
-      getUrlsMap: () => {
-        const urls: Record<string, string> = {};
-        
-        translations.forEach((translation: Translation) => {
-          const doc = translation.value;
-          if (!doc?.language || !doc?.slug?.current) return;
-          
-          const { language, slug, _type } = doc;
-          const pathMap = {
-            page: slug.current === '/' ? '' : `/${slug.current}`,
-            blogPost: `/blog/${slug.current}`,
-            author: `/blog/author/${slug.current}`,
-            category: `/blog/category/${slug.current}`,
-          };
-          
-          urls[language] = `/${language}${pathMap[_type as keyof typeof pathMap] || `/${slug.current}`}`;
-        });
-        
-        return urls;
-      },
-      findTranslationByLanguage: (targetLanguage: string) => {
-        return translations.find((t: Translation) => t.value?.language === targetLanguage);
-      }
-    };
-  } catch (error) {
-    console.error('Error fetching translation metadata:', error);
-    return {
-      translations: [],
-      getUrlsMap: () => ({}),
-      findTranslationByLanguage: () => undefined
-    };
+  
+  // Handle image assets (PNG, JPG, WebP)
+  if (ref.startsWith('image-')) {
+    // Use the image URL builder for proper transformations
+    return builder.image(asset).url() || ''
   }
+  
+  return ''
 }
-
-
