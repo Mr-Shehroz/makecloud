@@ -15,16 +15,16 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
   const { heading, servicesList = [] } = servicesData
 
   return (
-    <section className='md:my-[10.6vh] my-[8vh] max-w-[1480px] mx-auto px-4 xl:px-10'>
+    <section id='service' className='md:my-[10.6vh] my-[8vh] max-w-[1480px] mx-auto px-4 xl:px-10'>
       <div>
         <div className='md:w-[800px] md:mx-auto'>
           <h2 className='font-normal font-archivo-black text-center'>{heading}</h2>
         </div>  
         <div className='lg:flex lg:justify-center lg:items-center grid md:grid-cols-2 grid-cols-1 gap-5 mt-[4vh]'>
           {servicesList.map((service) => (
-            <div key={service._key} className='md:w-[335px] h-auto rounded-[22px] relative'>
+            <div key={service._key} className='md:w-[335px] h-auto rounded-[22px] relative group cursor-pointer'>
               {/* Top-left icon */}
-              <div className='bg-[#E53023] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute left-0 top-0 flex justify-center items-center'>
+              <div className='bg-[#E53023] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute left-0 top-0 flex justify-center items-center z-10'>
                 <img 
                   src={getFileUrl(service.icon)} 
                   alt="icon" 
@@ -35,7 +35,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
               {/* Bottom-right arrow link */}
               <Link 
                 href={service.url} 
-                className='bg-[#345CA7] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute right-0 bottom-0 flex justify-center items-center hover:bg-[#E53023] transition-all duration-300'
+                className='bg-[#345CA7] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute right-0 bottom-0 flex justify-center items-center hover:bg-[#E53023] transition-all duration-300 z-10'
               >
                 <img 
                   src="/arrow.svg" 
@@ -48,11 +48,11 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
               <img 
                 src={getFileUrl(service.image)} 
                 alt={service.title} 
-                className='w-full h-auto rounded-[22px]' 
+                className='w-full h-auto rounded-[22px] transition-transform duration-500 group-hover:scale-105' 
               />
               
               {/* Service title */}
-              <h4 className='font-normal font-archivo-black services absolute bottom-[11%] pr-8 md:pr-0'>
+              <h4 className='font-normal font-archivo-black services absolute bottom-[11%] pr-8 md:pr-0 transition-colors duration-300 group-hover:text-[#345CA7] z-10'>
                 {service.title}
               </h4>
             </div>

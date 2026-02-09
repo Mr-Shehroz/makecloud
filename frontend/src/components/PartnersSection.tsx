@@ -12,13 +12,10 @@ interface PartnersSectionProps {
 const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
   if (!partnersData) return null
 
-  const { heading, backgroundImage, partnersList = [] } = partnersData
-
-  // Get background image URL or use default
-  const bgImageUrl = backgroundImage ? getFileUrl(backgroundImage) : '/partners-bg.png'
+  const { heading, partnersList = [] } = partnersData
 
   return (
-    <section className='bg-[#F7F9FC] lg:h-[617px] px-4 xl:px-10'>
+    <section id='partner' className='bg-[#F7F9FC] lg:h-[617px] px-4 xl:px-10'>
       <div className='max-w-[1480px] mx-auto lg:pt-[12vh] lg:pb-[13vh] md:py-[10vh] py-[8vh]'>
         <div className='md:w-[633px] md:mx-auto'>
           <h2 className='font-normal font-archivo-black text-center'>{heading}</h2>
@@ -27,7 +24,7 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
           {partnersList.map((partner, index) => (
             <div 
               key={partner._key} 
-              className={`lg:w-[452px] h-[247px] bg-[url(${bgImageUrl})] xl:bg-cover bg-contain bg-no-repeat bg-center rounded-[30px] relative ${
+              className={`lg:w-[452px] h-[247px] bg-[url(/partners-bg.png)] xl:bg-cover bg-contain bg-no-repeat bg-center rounded-[30px] relative ${
                 index === 0 ? '' : 
                 index === 1 ? '' : 
                 'lg:mt-0 md:mt-[-4vh]'
@@ -38,7 +35,7 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
                 <img 
                   src={getFileUrl(partner.logoIcon)} 
                   alt={partner.partnerName.toLowerCase()} 
-                  className='2xl:w-[45px] xl:w-[38px] w-[30px] h-auto' 
+                  className='2xl:w-[35px] xl:w-[30px] w-[26px] h-auto' 
                 />
               </div>
               

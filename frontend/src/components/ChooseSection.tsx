@@ -23,11 +23,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
   const [current, setCurrent] = useState(0)
   const [isInteracting, setIsInteracting] = useState(false)
 
-  if (!chooseData) return null
-
-  const { heading, carouselItems = [], carouselSettings } = chooseData
-  const { autoplayInterval = 4000, enableAutoplay = true, enableLoop = true } = carouselSettings
-
+  // Move useEffects above early return.
   useEffect(() => {
     if (!api) return
 
@@ -42,7 +38,9 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
 
   // Autoplay effect
   useEffect(() => {
-    if (!api || !enableAutoplay) return
+    if (!api || !chooseData || !(chooseData.carouselSettings?.enableAutoplay ?? true)) return
+
+    const autoplayInterval = chooseData.carouselSettings?.autoplayInterval ?? 4000
 
     const autoplay = setInterval(() => {
       if (!isInteracting) {
@@ -51,7 +49,12 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
     }, autoplayInterval)
 
     return () => clearInterval(autoplay)
-  }, [api, isInteracting, enableAutoplay, autoplayInterval])
+  }, [api, isInteracting, chooseData])
+
+  if (!chooseData) return null
+
+  const { heading, carouselItems = [], carouselSettings } = chooseData
+  const { enableLoop = true } = carouselSettings
 
   return (
     <section className='md:py-[12vh] py-[8vh]'>

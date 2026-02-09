@@ -39,7 +39,7 @@ const FeaturesSection = ({ featuresData }: FeaturesSectionProps) => {
                     height={100} 
                     width={100} 
                     alt='tick-mark' 
-                    className='2xl:min-w-[30px] min-w-[20px] h-auto' 
+                    className='2xl:min-w-[30px] xl:max-w-[40px] lg:max-w-[30px] md:max-w-[30px] max-w-[40px] min-w-[25px] h-auto' 
                   />
                 </div>
                 <div>
@@ -64,7 +64,7 @@ const FeaturesSection = ({ featuresData }: FeaturesSectionProps) => {
                     height={100} 
                     width={100} 
                     alt='tick-mark' 
-                    className='2xl:min-w-[30px] min-w-[25px] h-auto' 
+                    className='2xl:min-w-[30px] xl:max-w-[40px] lg:max-w-[30px] md:max-w-[30px] max-w-[40px] min-w-[25px] h-auto' 
                   />
                 </div>
                 <div>
@@ -89,7 +89,7 @@ const FeaturesSection = ({ featuresData }: FeaturesSectionProps) => {
                     height={100} 
                     width={100} 
                     alt='tick-mark' 
-                    className='2xl:min-w-[30px] min-w-[25px] h-auto' 
+                    className='2xl:min-w-[30px] xl:max-w-[40px] lg:max-w-[30px] md:max-w-[30px] max-w-[40px] min-w-[25px] h-auto' 
                   />
                 </div>
                 <div>

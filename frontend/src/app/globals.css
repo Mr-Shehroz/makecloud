@@ -135,6 +135,8 @@ body {
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10vh;
 }
 
 .links {
@@ -274,12 +276,12 @@ textarea {
 
 @media screen and (max-width: 400px) {
   .date {
-    top: -18vh !important;
+    top: -16vh !important;
   }
 }
 @media screen and (max-width: 350px) {
   .date {
-    top: -16vh !important;
+    top: -14vh !important;
   }
   .title {
     top: 2vh !important;

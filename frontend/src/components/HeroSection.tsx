@@ -24,7 +24,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
               key={logo._key} 
               src={getFileUrl(logo.logo)} 
               alt={logo.alt} 
-              className='2xl:w-[91px] xl:w-[75px] md:w-[65px] w-[55px] h-auto' 
+              className='2xl:w-[70px] xl:w-[60px] md:w-[55px] w-[40px] h-auto' 
             />
           ))}
         </div>

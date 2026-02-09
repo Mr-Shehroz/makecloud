@@ -1,6 +1,5 @@
-import { createClient, defineQuery } from "next-sanity";
+import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const projectId =
 	process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id";
@@ -17,7 +16,7 @@ export const client = createClient({
 const builder = imageUrlBuilder(client)
 
 // Helper function to get file URL from Sanity asset
-export const getFileUrl = (asset: any): string => {
+export const getFileUrl = (asset: { asset?: { _ref?: string } } | undefined | null): string => {
   if (!asset?.asset?._ref) return ''
   
   const ref = asset.asset._ref

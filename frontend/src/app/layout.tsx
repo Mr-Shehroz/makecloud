@@ -1,6 +1,5 @@
 import { Archivo_Black, DM_Sans, Roboto } from "next/font/google";
 import "./globals.css";
-import { GoogleAnalytics } from "@/components/global/GoogleAnalytics";
 import FooterSectionContainer from "@/components/FooterSectionContainer";
 import HeaderContainer from "@/components/HeaderContainer";
 
@@ -28,8 +27,6 @@ export default async function RootLayout({
 	return (
 		<html suppressHydrationWarning lang="en">
 			<head>
-				{/* Google Analytics */}
-				<GoogleAnalytics />
 			</head>
 			<body
 				className={`${archivo_black.variable} ${roboto.variable} ${dm_sans.variable} antialiased`}

@@ -105,7 +105,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
   }
 
   return (
-    <section className='mt-[7.5vh]'>
+    <section id='contact' className='mt-[7.5vh]'>
       <div className=''>
         <div className='grid md:grid-cols-2 gap-8 items-stretch'>
           {/* Left Side - Gradient Background */}

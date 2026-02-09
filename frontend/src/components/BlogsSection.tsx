@@ -26,7 +26,7 @@ const BlogsSection = ({ blogsData }: BlogsSectionProps) => {
   const { enableLoop = true, align = 'start', showNavigation = true } = carouselSettings
 
   return (
-    <section>
+    <section id='case-study'>
       <div className='max-w-[1480px] mx-auto px-4 xl:px-10 md:mt-[11.2vh] mt-[6vh]'>
         <div className='flex justify-between items-center md:mb-2 mb-8 relative'>
           <h2 className='font-normal font-archivo-black'>
@@ -62,12 +62,12 @@ const BlogsSection = ({ blogsData }: BlogsSectionProps) => {
                       <img
                         src={getFileUrl(study.featuredImage)}
                         alt={study.title}   
-                        className='w-full h-full object-cover transition-transform duration-300'
+                        className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-105'
                       />
                     </div>
 
                     {/* Date */}
-                    <div className='flex items-center gap-2 mb-3 text-[#E53023] relative 2xl:top-[-16vh] lg:top-[-16vh] top-[-19vh] 2xl:pl-7 pl-5 date'>
+                    <div className='flex items-center gap-2 mb-3 text-[#E53023] relative lg:top-[-14vh] top-[-17vh] 2xl:pl-7 pl-5 date'>
                       <Calendar className='w-5 h-5' />
                       <span className='font-roboto font-bold 2xl:text-[18px] text-[16px] text-black'>
                         {formatDate(study.date)}
@@ -75,14 +75,14 @@ const BlogsSection = ({ blogsData }: BlogsSectionProps) => {
                     </div>
 
                     {/* Title and Arrow */}
-                    <div className='flex items-start justify-between gap-3 relative 2xl:pl-7 pl-5 2xl:pr-22 pr-18'>
-                      <h3 className='font-normal font-archivo-black 2xl:text-[22px] lg:text-[18px] text-[20px] text-black leading-[100%] uppercase 2xl:mt-[-16vh] lg:mt-[-16vh] mt-[-18vh] relative title'>
+                    <div className='flex items-start justify-between gap-3 relative 2xl:pl-7 pl-5 pr-18'>
+                      <h3 className='font-normal font-archivo-black 2xl:text-[22px] lg:text-[18px] text-[20px] text-black leading-[100%] uppercase lg:mt-[-13.5vh] mt-[-16vh] relative title transition-colors duration-300 group-hover:text-[#345CA7]'>
                         {study.title}
                       </h3>
                       <a
                         href={study.url}
                         target={study.openInNewTab ? '_blank' : '_self'}
-                        rel={study.openInNewTab ? 'noopener noreferrer' : ''}
+                        rel={study.openInNewTab ? 'noopener noreferrer' : undefined}
                         className='block'
                       >
                         <Button

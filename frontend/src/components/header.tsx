@@ -21,24 +21,15 @@ const Header = ({ headerData }: HeaderProps) => {
 
   const { navigation = [], contactInfo, logo } = headerData
 
-  // Helper to find dropdown items by label
-  const getDropdownItems = (label: string) => {
-    const item = navigation.find(nav => nav.label === label)
-    return item?.hasDropdown ? item.dropdownItems : []
-  }
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
     setServiceOpen(false)
     setPartnerOpen(false)
   }
 
-  // Determine if Service or Partner has dropdown
-  const serviceItem = navigation.find(nav => nav.label.toLowerCase().includes('service'))
-  const partnerItem = navigation.find(nav => nav.label.toLowerCase().includes('partner'))
-
   return (
-    <header className='py-[2vh]'>
+    // Set header to relative and high z-index so dropdowns go above hero
+    <header className='py-[2vh] relative z-[60]'>
       <div className='flex justify-between items-center max-w-[1480px] mx-auto px-4 xl:px-10 relative'>
         {/* Logo - Always Left */}
         <div className='flex items-center'>
@@ -64,7 +55,8 @@ const Header = ({ headerData }: HeaderProps) => {
         </div>
 
         {/* Desktop Navigation - Centered Horizontally (xl only); hidden on mobile and md-lg */}
-        <nav className='hidden xl:flex items-center lg:gap-6 gap-6 links absolute left-1/2 -translate-x-1/2'>
+        {/* Set nav's parent to relative, nav to static so real dropdown MENU can be absolute to header */}
+        <nav className='hidden lg:flex items-center xl:gap-12.5 gap-6 links absolute left-1/2 -translate-x-1/2 z-[61]'>
           {navigation.map((item) => (
             <div key={item._key} className='relative group'>
               {item.hasDropdown ? (
@@ -83,7 +75,8 @@ const Header = ({ headerData }: HeaderProps) => {
                     </span>
                   </Link>
                   {/* Dropdown Menu */}
-                  <div className='absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50'>
+                  {/* Make sure this is on top of hero: z-[70], and absolute to the <header> */}
+                  <div className='absolute left-0 top-[calc(100%+0.5rem)] w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[70]'>
                     {item.dropdownItems?.map((dropdownItem) => (
                       <Link 
                         key={dropdownItem._key} 
@@ -110,14 +103,14 @@ const Header = ({ headerData }: HeaderProps) => {
         {/* Mobile Menu Button for md to lg - Visible only md to lg */}
         <button 
           onClick={toggleMenu}
-          className='hidden md:block xl:hidden text-white z-50 relative'
+          className='hidden md:block lg:hidden text-white z-50 relative'
           aria-label='Toggle menu'
         >
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
         {/* Contact Info - Hidden on Mobile */}
-        <div className='hidden md:flex flex-col gap-0'>
+        <div className='hidden lg:flex flex-col gap-0'>
           <h5 className='links'>{contactInfo.phoneNumber}</h5>
           <h4 className='font-normal lg:text-[20px] text-[18px] font-archivo-black text-white'>
             {contactInfo.consultantText}
@@ -139,13 +132,13 @@ const Header = ({ headerData }: HeaderProps) => {
         {/* Backdrop */}
         {isMenuOpen && (
           <div 
-            className='xl:hidden fixed inset-0 bg-black/50 z-40'
+            className='lg:hidden fixed inset-0 bg-black/50 z-40'
             onClick={toggleMenu}
           />
         )}
 
         {/* Sidebar */}
-        <div className={`xl:hidden fixed top-0 right-0 h-full w-[80%] max-w-[320px] hero z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`lg:hidden fixed top-0 right-0 h-full w-[80%] max-w-[320px] hero z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           {/* Close Button */}
           <div className='flex justify-end p-6'>
             <button 
@@ -232,7 +225,7 @@ const Header = ({ headerData }: HeaderProps) => {
                     <Link 
                       href={item.url} 
                       onClick={toggleMenu}
-                      className='py-3 border-b border-white/30 hover:border-white transition-colors text-white hover:text-gray-300'
+                      className='py-3 border-b border-white/30 hover:border-white transition-colors text-white hover:text-gray-300 block'
                     >
                       {item.label}
                     </Link>
