@@ -29,7 +29,7 @@ const Header = ({ headerData }: HeaderProps) => {
 
   return (
     // Set header to relative and high z-index so dropdowns go above hero
-    <header className='py-[2vh] relative z-[60]'>
+    <header className='py-[2vh] relative z-[60] fixed left-0 w-full'>
       <div className='flex justify-between items-center max-w-[1480px] mx-auto px-4 xl:px-10 relative'>
         {/* Logo - Always Left */}
         <div className='flex items-center'>
