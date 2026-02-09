@@ -15,7 +15,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
   const { logos = [], heading, subheading, ctaButton } = heroData
 
   return (
-    <section className='relative w-full hero md:h-[500px] h-[420px] my-[2.5vh] px-4 xl:px-10'>
+    <section className='relative w-full hero md:h-[500px] h-[420px] my-[2.5vh] lg:mt-[12vh] md:mt-[10vh] mt-[9vh] px-4 xl:px-10'>
       <div className='flex flex-col justify-center items-center h-full'>
         {/* Partner Logos */}
         <div className='flex items-center justify-center xl:gap-11 gap-8'>
