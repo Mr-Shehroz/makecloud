@@ -6,7 +6,7 @@ import { codeInput } from "@sanity/code-input";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { structure } from './structure';
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID! || "yk6vsu9p";
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID!;
 const dataset = process.env.SANITY_STUDIO_DATASET || "production";
 
 if (!projectId) {
