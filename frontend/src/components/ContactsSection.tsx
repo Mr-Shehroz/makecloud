@@ -169,7 +169,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
             <Image src={nameVectorUrl} height={100} width={100} alt='vector' className='2xl:h-auto h-[100%] absolute top-0 left-0 z-10' />
 
             {/* Content */}
-            <div className='relative z-10 2xl:w-[611px] xl:w-[520px] px-5 xl:px-0'>
+            <div className='relative z-10 2xl:w-[611px] xl:w-[520px] px-4 xl:px-0'>
               <h2 className='font-normal h2 leading-[100%] font-archivo-black mb-6'>
                 {heading}
               </h2>
@@ -235,7 +235,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
             variants={rightVariants}
           >
             <Image src={formBgImageUrl} height={100} width={100} alt='vector' className='xl:w-[78px] w-[65px] absolute right-0 top-1/2 -translate-y-1/2 z-10' />
-            <div className='2xl:w-[562px] xl:w-[470px] px-5 xl:px-0'>
+            <div className='2xl:w-[562px] xl:w-[470px] px-4 xl:px-0'>
               <h3 className='font-normal font-archivo-black text-[22px] leading-[100%] text-black mb-6 uppercase'>
                 {formHeading}
               </h3>
@@ -243,7 +243,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
               <form onSubmit={handleSubmit} className='xl:space-y-4 space-y-3 relative z-10'>
                 {/* Full Name */}
                 <div>
-                  <label htmlFor='fullName' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] mb-2 text-black'>
+                  <label htmlFor='fullName' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] md:mb-2 mb-3 text-black'>
                     {formFields.fullNameLabel} {requiredFields.includes('fullName') && <span className='text-red-500'>*</span>}
                   </label>
                   <Input
@@ -261,7 +261,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                 {/* Email and Phone */}
                 <div className='grid md:grid-cols-2 xl:gap-4 gap-3'>
                   <div>
-                    <label htmlFor='email' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] mb-2 text-black'>
+                    <label htmlFor='email' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] md:mb-2 mb-3 text-black'>
                       {formFields.emailLabel} {requiredFields.includes('email') && <span className='text-red-500'>*</span>}
                     </label>
                     <Input
@@ -276,7 +276,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                     />
                   </div>
                   <div>
-                    <label htmlFor='phone' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] mb-2 text-black'>
+                    <label htmlFor='phone' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] md:mb-2 mb-3 text-black'>
                       {formFields.phoneLabel}
                     </label>
                     <Input
@@ -293,7 +293,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
 
                 {/* Message */}
                 <div>
-                  <label htmlFor='message' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] mb-2 text-black'>
+                  <label htmlFor='message' className='block font-roboto xl:text-[18px] text-[16px] font-normal leading-[100%] md:mb-2 mb-3 text-black'>
                     {formFields.messageLabel} {requiredFields.includes('message') && <span className='text-red-500'>*</span>}
                   </label>
                   <Textarea
