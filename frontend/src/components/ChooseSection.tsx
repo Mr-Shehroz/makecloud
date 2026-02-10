@@ -88,7 +88,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
   return (
     <section className='md:py-[12vh] py-[8vh]'>
       <div>
-        <div className='w-full max-w-[689px] mx-auto mb-[4.3vh]'>
+        <div className='w-full max-w-[689px] px-4 xl:px-10 mx-auto mb-[4.3vh]'>
           <h2 className='font-normal font-archivo-black text-center'>
             {heading}
           </h2>
@@ -124,22 +124,35 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
                       className="basis-auto flex justify-center overflow-visible h-full items-center"
                     >
                       <div 
-                        className={`relative rounded-[20px] px-4 md:px-0 overflow-hidden transition-all duration-500 ease-in-out ${
+                        className={`relative rounded-[20px] px-4 md:px-0 overflow-hidden ${
                           isCenter 
-                            ? 'xl:w-[742px] xl:h-[344px] lg:w-[600px] md:w-[500px] md:h-[300px] w-[75%] h-[400px] scale-100' 
+                            ? 'xl:w-[742px] xl:h-[344px] lg:w-[600px] md:w-[500px] md:h-[300px] w-[100vw] h-[400px] scale-100' 
                             : 'xl:w-[670px] xl:h-[290px] lg:w-[560px] w-[460px] h-[230px] scale-100'
                         }`}
+                        style={{
+                          transition: 'all 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                          willChange: 'transform, width, height',
+                        }}
                       >
                         {/* Background Image */}
                         <div 
-                          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out"
-                          style={{ backgroundImage: `url(${getFileUrl(item.backgroundImage)})` }}
+                          className="absolute inset-0 bg-cover bg-center"
+                          style={{ 
+                            backgroundImage: `url(${getFileUrl(item.backgroundImage)})`,
+                            transition: 'transform 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                            willChange: 'transform',
+                          }}
                         />
 
                         {/* Content - Only visible when centered */}
                         {isCenter && (
-                          <div className="relative h-full flex flex-col items-center justify-end p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div className="bg-white rounded-[20px] pl-3.5 pr-6 py-4 -mx-4 md:mx-0 shadow-lg xl:w-[651px] xl:h-[110px] lg:w-[500px] md:w-[440px] w-[60%] lg:h-[100px] flex flex-col">
+                          <div 
+                            className="relative h-full flex flex-col items-center justify-end p-6"
+                            style={{
+                              animation: 'fadeInUp 500ms cubic-bezier(0.4, 0, 0.2, 1) forwards',
+                            }}
+                          >
+                            <div className="bg-white rounded-[20px] pl-3.5 pr-6 py-4 -mx-4 md:mx-0 shadow-lg xl:w-[651px] xl:h-[110px] lg:w-[500px] md:w-[440px] w-[95%] lg:h-[100px] flex flex-col">
                               <div className="flex items-start lg:gap-4 gap-2">
                                 {/* Icon */}
                                 <div className="flex-shrink-0 xl:w-[70px] xl:h-[70px] lg:h-[50px] lg:w-[50px] w-[40px] h-[40px] bg-[#E53023] rounded-full flex items-center justify-center text-white">
@@ -190,17 +203,33 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
               <button
                 key={index}
                 onClick={() => handleDotClick(index)}
-                className={`w-[10px] h-[10px] rounded-full transition-all duration-300 relative overflow-visible ${
+                className={`w-[10px] h-[10px] rounded-full relative overflow-visible ${
                   index === current 
                     ? 'bg-[#345CA7] border border-[#345CA7] rounded-full pagination overflow-visible' 
                     : 'bg-black'
                 }`}
+                style={{
+                  transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), border-color 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   )
 }
