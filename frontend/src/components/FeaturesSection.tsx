@@ -148,7 +148,7 @@ const FeaturesSection = ({ featuresData }: FeaturesSectionProps) => {
           </motion.div>
 
           {/* Column 3 */}
-          <motion.div className='flex flex-col gap-6 md:w-[33%] w-full' variants={columnVariant}>
+          <motion.div className='flex flex-col gap-6 md:w-[33%] w-full mt-[2.5vh] md:mt-0' variants={columnVariant}>
             {column3.map((feature, index) => (
               <motion.div
                 key={feature._key || `col3-${index}`}
