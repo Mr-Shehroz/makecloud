@@ -158,7 +158,7 @@ const BlogsSection = ({ blogsData }: BlogsSectionProps) => {
       viewport={{ once: true, amount: 0.15 }}
       variants={sectionVariants}
     >
-      <div className='max-w-[1480px] mx-auto px-4 xl:px-10 md:mt-[11.2vh] mt-[6vh]'>
+      <div className='max-w-[1480px] mx-auto px-4 xl:px-10 md:mt-[11.2vh] mt-[2.7vh] md:mb-0 mb-[14vh]'>
         <motion.div
           className='flex justify-between items-center md:mb-2 mb-8 relative'
           variants={headingVariants}
@@ -248,12 +248,11 @@ const BlogsSection = ({ blogsData }: BlogsSectionProps) => {
                         rel={study.openInNewTab ? 'noopener noreferrer' : undefined}
                         className='block'
                         variants={arrowVariants}
-                        whileHover={{ scale: 1.07 }}
                       >
                         <Button
                           size="icon"
                           type="button"
-                          className='bg-[#345CA7] hover:bg-[#E53023] text-white rounded-full h-12 w-12 absolute right-0 bottom-10 cursor-pointer duration-200 transition-all'
+                          className='bg-[#345CA7] hover:bg-[#E53023] group-hover:bg-[#E53023] text-white rounded-full h-12 w-12 absolute right-0 bottom-10 cursor-pointer duration-200 transition-all'
                         >
                           <ArrowUpRight className='w-5 h-5' />
                         </Button>

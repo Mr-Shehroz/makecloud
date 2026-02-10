@@ -61,7 +61,7 @@ const TrustedSection = ({ trustedData }: TrustedSectionProps) => {
                       <img
                         src={getFileUrl(partner.logo)} 
                         alt={partner.name}
-                        className='xl:w-[170px] lg:w-[120px] w-[100px] h-auto'
+                        className='xl:w-[140px] lg:w-[120px] w-[100px] h-auto'
                       />
                     )}
                   </div>

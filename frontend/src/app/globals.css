@@ -286,6 +286,10 @@ textarea {
   .title {
     top: 2vh !important;
   }
+  .partners-logo {
+    padding-bottom: 0px !important;
+    padding-top: 20px !important;
+  }
 }
 
 input, textarea {

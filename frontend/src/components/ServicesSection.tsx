@@ -103,7 +103,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
                 {/* Bottom-right arrow link */}
                 <Link 
                   href={service.url}
-                  className='bg-[#345CA7] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute right-0 bottom-0 flex justify-center items-center hover:bg-[#E53023] transition-all duration-300 z-10'
+                  className='bg-[#345CA7] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute right-0 bottom-0 flex justify-center items-center group-hover:bg-[#E53023] hover:bg-[#E53023] transition-all duration-300 z-10'
                 >
                   <motion.img 
                     src="/arrow.svg" 

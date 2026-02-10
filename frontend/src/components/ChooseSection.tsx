@@ -18,12 +18,13 @@ interface ChooseSectionProps {
   chooseData: ChooseData | null
 }
 
+const SMOOTH_DURATION = 800; // ms - for smoother jump/scrollTo
+
 const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [isInteracting, setIsInteracting] = useState(false)
 
-  // Move useEffects above early return.
   useEffect(() => {
     if (!api) return
 
@@ -38,13 +39,21 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
 
   // Autoplay effect
   useEffect(() => {
-    if (!api || !chooseData || !(chooseData.carouselSettings?.enableAutoplay ?? true)) return
+    if (
+      !api ||
+      !chooseData ||
+      !(chooseData.carouselSettings?.enableAutoplay ?? true)
+    )
+      return
 
-    const autoplayInterval = chooseData.carouselSettings?.autoplayInterval ?? 4000
+    const autoplayInterval =
+      chooseData.carouselSettings?.autoplayInterval ?? 4000
 
     const autoplay = setInterval(() => {
       if (!isInteracting) {
-        api.scrollNext()
+        // CarouselApi.scrollNext([jumpTo], [instant])
+        // If passed true, jump is instant. We want animation/transition, so `false` or undefined.
+        api.scrollNext(false)
       }
     }, autoplayInterval)
 
@@ -55,6 +64,26 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
 
   const { heading, carouselItems = [], carouselSettings } = chooseData
   const { enableLoop = true } = carouselSettings
+
+  // Smooth scroll helpers - call .scrollTo(index, instant?: boolean)
+  function handleDotClick(index: number) {
+    if (api) {
+      // .scrollTo(index, instant?) - instant = false for smooth
+      api.scrollTo(index, false)
+    }
+  }
+
+  function handlePrev() {
+    if (api) {
+      api.scrollPrev(false)
+    }
+  }
+
+  function handleNext() {
+    if (api) {
+      api.scrollNext(false)
+    }
+  }
 
   return (
     <section className='md:py-[12vh] py-[8vh]'>
@@ -71,7 +100,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
             opts={{
               align: "center",
               loop: enableLoop,
-              duration: 25,
+              duration: SMOOTH_DURATION,
               dragFree: false,
               skipSnaps: false,
             }}
@@ -88,7 +117,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
               <CarouselContent className="flex items-center h-full">
                 {carouselItems.map((item, index) => {
                   const isCenter = index === current
-                  
+
                   return (
                     <CarouselItem 
                       key={item._key || index} 
@@ -106,7 +135,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-in-out"
                           style={{ backgroundImage: `url(${getFileUrl(item.backgroundImage)})` }}
                         />
-                        
+
                         {/* Content - Only visible when centered */}
                         {isCenter && (
                           <div className="relative h-full flex flex-col items-center justify-end p-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -119,11 +148,11 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
                                     height={45} 
                                     width={45} 
                                     alt="icon" 
-                                    className='xl:w-[45px] lg:w-[35px] w-[25px] h-auto' 
+                                    className='xl:w-[35px] lg:w-[25px] w-[20px] h-auto' 
                                     unoptimized 
                                   />
                                 </div>
-                                
+
                                 {/* Text Content */}
                                 <div className="flex-1">
                                   <h3 className="font-normal font-archivo-black xl:text-[22px] md:text-[18px] text-[16px] leading-[100%] text-black xl:mb-3.5 mb-2 uppercase">
@@ -145,8 +174,14 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
             </div>
             
             {/* Navigation Arrows */}
-            <CarouselPrevious className="hidden md:flex -left-12 lg:-left-16" />
-            <CarouselNext className="hidden md:flex -right-12 lg:-right-16" />
+            <CarouselPrevious
+              className="hidden md:flex -left-12 lg:-left-16"
+              onClick={handlePrev}
+            />
+            <CarouselNext
+              className="hidden md:flex -right-12 lg:-right-16"
+              onClick={handleNext}
+            />
           </Carousel>
           
           {/* Dots Indicator */}
@@ -154,7 +189,7 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
             {carouselItems.map((_, index) => ( 
               <button
                 key={index}
-                onClick={() => api?.scrollTo(index)}
+                onClick={() => handleDotClick(index)}
                 className={`w-[10px] h-[10px] rounded-full transition-all duration-300 relative overflow-visible ${
                   index === current 
                     ? 'bg-[#345CA7] border border-[#345CA7] rounded-full pagination overflow-visible' 

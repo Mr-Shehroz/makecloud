@@ -91,7 +91,7 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
                   alt={partner.partnerName} 
                   width={100} 
                   height={100} 
-                  className={`2xl:w-[244px] xl:w-[200px] w-[150px] h-auto ml-[4.2vh] mt-[3.7vh] xl:pt-0 pt-5 ${
+                  className={`2xl:w-[244px] xl:w-[200px] w-[150px] h-auto ml-[4.2vh] mt-[3.7vh] xl:pt-0 md:pb-0 pt-3 pb-3 partners-logo ${
                     partner.partnerName.toLowerCase().includes('azure') 
                       ? '2xl:w-[316px] xl:w-[270px] w-[200px] mt-[4vh]' 
                       : partner.partnerName.toLowerCase().includes('console') || partner.partnerName.toLowerCase().includes('google')
@@ -104,7 +104,7 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
               
               {/* Divider line */}
               <motion.div 
-                className='border border-[#EDEDF1] w-[73%] xl:my-[3vh] my-[1vh]'
+                className='border border-[#EDEDF1] w-[73%] xl:my-[2vh] my-[1vh]'
                 variants={itemVariant}
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -114,7 +114,7 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
 
               {/* Description text */}
               <motion.p
-                className='font-roboto font-normal 2xl:text-[18px] text-[16px] leading-[100%] text-black xl:pl-8 xl:pr-0 pl-5 pr-4'
+                className='font-roboto font-normal 2xl:text-[18px] text-[16px] md:leading-[120%] leading-[100%] text-black xl:pl-8 xl:pr-0 pl-5 pr-4'
                 variants={itemVariant}
               >
                 {partner.description}

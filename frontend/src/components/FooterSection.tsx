@@ -98,6 +98,9 @@ const FooterSection = ({ footerData }: FooterSectionProps) => {
     }
   }
 
+  // Google Maps link for MakeCloud
+  const locationLink = "https://www.google.com/maps/place/MakeCloud/data=!4m2!3m1!1s0x0:0x20ab1389917c9999?sa=X&ved=1t:2428&ictx=111"
+
   return (
     <section className='mt-[11vh]'>
       <div className='bg-[#0F1F3D] md:py-16 py-12'>
@@ -212,7 +215,12 @@ const FooterSection = ({ footerData }: FooterSectionProps) => {
                   </a>
                 </li>
                 <li>
-                  <div className='flex items-start gap-3 text-white font-roboto font-normal xl:text-[18px] text-[16px] hover:opacity-90'>
+                  <a
+                    href={locationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className='flex items-start gap-3 text-white font-roboto font-normal xl:text-[18px] text-[16px] hover:opacity-90 transition-colors group'
+                  >
                     <div className='bg-red-500 w-8 h-8 rounded-full flex justify-center items-center'>
                       <MapPin className='w-4 h-4 text-white' />
                     </div>
@@ -220,7 +228,7 @@ const FooterSection = ({ footerData }: FooterSectionProps) => {
                       {contactInfo.address.line1}<br />
                       {contactInfo.address.line2}
                     </span>
-                  </div>
+                  </a>
                 </li>
               </ul>
             </div>

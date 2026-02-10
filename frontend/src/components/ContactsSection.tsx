@@ -51,6 +51,9 @@ const contactInfoVariants = {
   visible: { transition: { staggerChildren: 0.18 } }
 } as const
 
+// Map link requested in prompt
+const MAP_LINK = "https://www.google.com/maps/place/MakeCloud/data=!4m2!3m1!1s0x0:0x20ab1389917c9999?sa=X&ved=1t:2428&ictx=111";
+
 const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -210,10 +213,16 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                   </div>
                   <div>
                     <p className='xl:text-[18px] text-[16px] font-roboto leading-[100%] text-white mb-2'>{address.label}</p>
-                    <p className='xl:text-[18px] text-[16px] font-roboto leading-[120%] text-white font-bold'>
+                    {/* Link the address to Google Maps as requested */}
+                    <a
+                      href={MAP_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="xl:text-[18px] text-[16px] font-roboto leading-[120%] text-white font-bold hover:underline"
+                    >
                       {address.street}<br />
                       {address.city}
-                    </p>
+                    </a>
                   </div>
                 </motion.div>
               </motion.div>
