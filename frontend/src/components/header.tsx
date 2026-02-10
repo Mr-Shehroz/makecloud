@@ -178,7 +178,11 @@ const Header = ({ headerData }: HeaderProps) => {
           transition={{ delay: 0.15, duration: 0.3 }}
           className='hidden lg:flex flex-col gap-0'
         >
-          <h5 className='links'>{contactInfo.phoneNumber}</h5>
+          <h5 className='links'>
+            <a href={`tel:${contactInfo.phoneNumber}`} className='hover:underline'>
+              {contactInfo.phoneNumber}
+            </a>
+          </h5>
           <h4 className='font-normal lg:text-[20px] text-[18px] font-archivo-black text-white'>
             {contactInfo.consultantText}
           </h4>
@@ -370,7 +374,11 @@ const Header = ({ headerData }: HeaderProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.12, duration: 0.18 }}
                 >
-                  <h5 className='links text-base text-white'>{contactInfo.phoneNumber}</h5>
+                  <h5 className='links text-base text-white'>
+                    <a href={`tel:${contactInfo.phoneNumber}`} className="hover:underline">
+                      {contactInfo.phoneNumber}
+                    </a>
+                  </h5>
                   <h4 className='font-normal text-sm font-archivo-black text-white'>
                     {contactInfo.consultantText}
                   </h4>
