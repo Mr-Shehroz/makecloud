@@ -10,10 +10,46 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { getFileUrl } from '@/sanity/client'
 import type { ContactsData } from '@/types/contacts'
+import { motion } from 'framer-motion'
 
 interface ContactsSectionProps {
   contactsData: ContactsData | null
 }
+
+// Animation variants
+const sectionVariants = {
+  hidden: { opacity: 0, y: 35 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, staggerChildren: 0.12, delayChildren: 0.05, ease: [0.4, 0, 0.2, 1] }
+  }
+} as const
+
+const leftVariants = {
+  hidden: { opacity: 0, x: -48 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.4, 0, 0.2, 1] } }
+} as const
+
+const rightVariants = {
+  hidden: { opacity: 0, x: 48 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.4, 0, 0.2, 1] } }
+} as const
+
+const contentVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
+} as const
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.48, ease: [0.4, 0, 0.2, 1] } }
+} as const
+
+const contactInfoVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.18 } }
+} as const
 
 const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
   const [formData, setFormData] = useState({
@@ -88,7 +124,7 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
           message: '',
           privacy: false
         })
-        
+
         // Clear success message after 5 seconds
         setTimeout(() => {
           setSubmitStatus('idle')
@@ -105,11 +141,27 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
   }
 
   return (
-    <section id='contact' className='mt-[7.5vh]'>
-      <div className=''>
-        <div className='grid md:grid-cols-2 gap-8 items-stretch'>
+    <motion.section
+      id='contact'
+      className='mt-[7.5vh]'
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      <motion.div>
+        <motion.div
+          className='grid md:grid-cols-2 gap-8 items-stretch'
+          variants={contentVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {/* Left Side - Gradient Background */}
-          <div className='hero 2xl:w-[967px] md:w-[53vw] text-white relative overflow-hidden rounded-br-[20px] rounded-tr-[20px] md:pt-[10.6vh] pt-[8vh] lg:pb-[11vh] pb-[6vh] 2xl:pl-[13.5vw] xl:pl-[9vw] md:pl-[7vw]'>
+          <motion.div
+            className='hero 2xl:w-[967px] md:w-[53vw] text-white relative overflow-hidden rounded-br-[20px] rounded-tr-[20px] md:pt-[10.6vh] pt-[8vh] lg:pb-[11vh] pb-[6vh] 2xl:pl-[13.5vw] xl:pl-[9vw] md:pl-[7vw]'
+            variants={leftVariants}
+          >
             <Image src={bgImageUrl} height={100} width={100} alt='vector' className='xl:w-[199px] w-[160px] h-auto absolute -top-6 -right-6 z-10' />
             <Image src={nameVectorUrl} height={100} width={100} alt='vector' className='2xl:h-auto h-[100%] absolute top-0 left-0 z-10' />
 
@@ -124,9 +176,9 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
               </p>
 
               {/* Contact Info */}
-              <div className='space-y-6'>
+              <motion.div className='space-y-6' variants={contactInfoVariants}>
                 {/* Phone */}
-                <div className='flex items-start gap-4'>
+                <motion.div className='flex items-start gap-4' variants={itemVariants}>
                   <div className='bg-white w-12 h-12 flex justify-center items-center rounded-full text-black'>
                     <Phone className='w-6 h-6' />
                   </div>
@@ -136,10 +188,10 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                       {phone.number}
                     </a>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Email */}
-                <div className='flex items-start gap-4'>
+                <motion.div className='flex items-start gap-4' variants={itemVariants}>
                   <div className='bg-white w-12 h-12 flex justify-center items-center rounded-full text-black'>
                     <Mail className='w-6 h-6' />
                   </div>
@@ -149,10 +201,10 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                       {email.address}
                     </a>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Address */}
-                <div className='flex items-start gap-4'>
+                <motion.div className='flex items-start gap-4' variants={itemVariants}>
                   <div className='bg-white w-12 h-12 flex justify-center items-center rounded-full text-black'>
                     <MapPin className='w-6 h-6' />
                   </div>
@@ -163,13 +215,16 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                       {address.city}
                     </p>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side - Form */}
-          <div className='bg-[#F7F9FC] 2xl:w-[900px] md:w-[45vw] ml-auto border border-[#DADEE7] rounded-bl-[16px] rounded-tl-[16px] 2xl:pt-[5.7vh] pt-[4vh] 2xl:pl-[4.6vw] xl:pl-[3vw] md:pl-[1vw] relative overflow-hidden md:pb-0 pb-[4vh]'>
+          <motion.div
+            className='bg-[#F7F9FC] 2xl:w-[900px] md:w-[45vw] ml-auto border border-[#DADEE7] rounded-bl-[16px] rounded-tl-[16px] 2xl:pt-[5.7vh] pt-[4vh] 2xl:pl-[4.6vw] xl:pl-[3vw] md:pl-[1vw] relative overflow-hidden md:pb-0 pb-[4vh]'
+            variants={rightVariants}
+          >
             <Image src={formBgImageUrl} height={100} width={100} alt='vector' className='xl:w-[78px] w-[65px] absolute right-0 top-1/2 -translate-y-1/2 z-10' />
             <div className='2xl:w-[562px] xl:w-[470px] px-5 xl:px-0'>
               <h3 className='font-normal font-archivo-black text-[22px] leading-[100%] text-black mb-6 uppercase'>
@@ -283,10 +338,10 @@ const ContactsSection = ({ contactsData }: ContactsSectionProps) => {
                 )}
               </form>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   )
 }
 
