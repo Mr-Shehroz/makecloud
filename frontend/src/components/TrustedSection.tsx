@@ -71,8 +71,8 @@ const TrustedSection = ({ trustedData }: TrustedSectionProps) => {
             
             {showNavigation && (
               <>
-                <CarouselPrevious className='absolute md:-left-[3.4vw] left-[-4vw] top-1/2 -translate-y-1/2 bg-[#345CA7] hover:bg-blue-700 text-white border-none md:h-12 md:w-12 w-8 h-8 rounded-full shadow-lg z-10 navigation' />
-                <CarouselNext className='absolute md:-right-[3.4vw] right-[-4vw] top-1/2 -translate-y-1/2 bg-[#345CA7] hover:bg-blue-700 text-white border-none md:h-12 md:w-12 w-8 h-8 rounded-full shadow-lg z-10 navigation' />
+                <CarouselPrevious className='absolute xl:-left-[3.4vw] md:-left-[3.4vw] lg:-left-[2.5vw] left-[-4vw] top-1/2 -translate-y-1/2 bg-[#345CA7] hover:bg-blue-700 text-white border-none md:h-12 md:w-12 w-8 h-8 rounded-full shadow-lg z-10 navigation' />
+                <CarouselNext className='absolute xl:-right-[3.4vw] md:-right-[3.4vw] lg:-right-[2.5vw] right-[-4vw] top-1/2 -translate-y-1/2 bg-[#345CA7] hover:bg-blue-700 text-white border-none md:h-12 md:w-12 w-8 h-8 rounded-full shadow-lg z-10 navigation' />
               </>
             )}
           </Carousel>
