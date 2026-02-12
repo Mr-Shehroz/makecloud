@@ -41,57 +41,74 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
 
   return (
     <motion.section
-      className='relative w-full hero md:h-[500px] h-[420px] my-[2.5vh] lg:mt-[12vh] md:mt-[10vh] mt-[9vh] px-4 xl:px-10'
+      className='relative w-full bg-[#F7F9FC] lg:h-[60vh] md:h-[50vh] min-h-[400px] pt-[5vh] mb-[2.5vh] lg:mt-[10vh] md:mt-[8vh] mt-[6vh]'
       initial="hidden"
       animate="visible"
       variants={parentAnim}
     >
       <motion.div
-        className='flex flex-col justify-center items-center h-full'
+        className='flex flex-col-reverse md:justify-between md:flex-row-reverse md:items-center h-full max-w-[1480px] mx-auto xl:px-10 px-4'
         variants={parentAnim}
       >
-        {/* Partner Logos */}
+        {/* Cloud Logo + Border + Partner Logos (right side) */}
         <motion.div
-          className='flex items-center justify-center xl:gap-11 gap-8'
+          className='flex items-center justify-center gap-5 xl:gap-10 md:mt-0 mt-[5vh]'
           variants={parentAnim}
         >
-          {logos.map((logo) => (
-            <motion.img 
-              key={logo._key}
-              src={getFileUrl(logo.logo)}
-              alt={logo.alt}
-              className='2xl:w-[70px] xl:w-[60px] md:w-[55px] w-[40px] h-auto'
-              variants={logoAnim}
-              // Slight delay via style, not variants, to keep types clean
-              style={{}}
-            />
-          ))}
+          {/* Cloud Logo */}
+          <motion.img
+            key="cloud-logo"
+            // src={getFileUrl(cloudLogo)}
+            src="/favicon.svg"
+            alt="Make Cloud Logo"
+            className='2xl:w-[90px] xl:w-[70px] md:w-[60px] w-[45px] h-auto hero p-3 rounded-xl'
+            variants={logoAnim}
+            style={{}}
+          />
+          {/* Vertical Divider */}
+          <div className="h-[46px] w-[2px] bg-[#E4E8F0] mx-3 rounded-full" />
+          {/* Partner Logos */}
+          <div className="flex items-center gap-6 xl:gap-9">
+            {logos
+              .slice()
+              .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
+              .map((logo) => (
+                <motion.img 
+                  key={logo._key}
+                  src={getFileUrl(logo.logo)}
+                  alt={logo.alt}
+                  className='2xl:w-[70px] xl:w-[60px] md:w-[55px] w-[40px] h-auto'
+                  variants={logoAnim}
+                  style={{}}
+                />
+              ))}
+          </div>
         </motion.div>
 
         {/* Hero Content */}
         <motion.div
-          className='md:w-[681px] md:mx-auto mt-[1.6vh]'
+          className='xl:w-[681px] lg:w-[60%] md:w-[50%] mt-[1.6vh]'
           variants={parentAnim}
         >
           <motion.h1
-            className='font-archivo-black text-center 2xl:text-[77px] xl:text-[65px] lg:text-[56px] md:text-[48px] text-[36px] leading-[100%] font-normal uppercase text-white'
+            className='font-archivo-black 2xl:text-[77px] xl:text-[65px] lg:text-[56px] md:text-[48px] text-[36px] leading-[100%] font-normal capitalize text-black'
             variants={itemAnim}
           >
             {heading}
           </motion.h1>
           <motion.p
-            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[16px] text-center font-normal leading-[100%] mt-[1.5vh] text-white'
+            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[16px] font-normal leading-[100%] mt-[1.5vh] text-black'
             variants={itemAnim}
           >
             {subheading}
           </motion.p>
           <motion.div
-            className='flex justify-center mt-[2.8vh]'
+            className='mt-[2.8vh]'
             variants={itemAnim}
           >
             <motion.div variants={buttonAnim}>
               <Button 
-                className='font-roboto font-bold xl:text-[18px] text-[16px] text-black hover:opacity-90 hover:bg-white bg-white rounded-full xl:w-[154px] xl:h-[43px] px-6 py-3 flex justify-center items-center cursor-pointer'
+                className='font-roboto font-bold xl:text-[18px] text-[16px] text-white hover:opacity-80 hero rounded-full xl:w-[154px] xl:h-[43px] px-6 py-3 cursor-pointer'
                 onClick={() => {
                   if (ctaButton.openInNewTab) {
                     window.open(ctaButton.url, '_blank')

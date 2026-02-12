@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { getFileUrl } from '@/sanity/client'
 import type { HeaderData } from '@/types/header'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from './ui/button'
 
 interface HeaderProps {
   headerData: HeaderData | null
@@ -70,20 +71,20 @@ const Header = ({ headerData }: HeaderProps) => {
         >
           <Link href="/">
             {logo ? (
-              <Image 
-                src={getFileUrl(logo)} 
-                alt="logo" 
-                height={100} 
-                width={100} 
-                className='2xl:w-[292px] xl:w-[250px] lg:w-[220px] md:w-[180px] w-[140px] h-auto' 
+              <Image
+                src={getFileUrl(logo)}
+                alt="logo"
+                height={100}
+                width={100}
+                className='2xl:w-[292px] xl:w-[250px] lg:w-[220px] md:w-[180px] w-[140px] h-auto'
               />
             ) : (
-              <Image 
-                src="/logo.svg" 
-                alt="logo" 
-                height={100} 
-                width={100} 
-                className='2xl:w-[292px] xl:w-[250px] lg:w-[220px] md:w-[180px] w-[140px] h-auto' 
+              <Image
+                src="/logo.svg"
+                alt="logo"
+                height={100}
+                width={100}
+                className='2xl:w-[292px] xl:w-[250px] lg:w-[220px] md:w-[180px] w-[140px] h-auto'
               />
             )}
           </Link>
@@ -136,8 +137,8 @@ const Header = ({ headerData }: HeaderProps) => {
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.08 + didx * 0.05, duration: 0.18 }}
                         >
-                          <Link 
-                            href={dropdownItem.url} 
+                          <Link
+                            href={dropdownItem.url}
                             className='block px-4 py-3 text-black hover:bg-gray-100 transition-colors'
                           >
                             {dropdownItem.label}
@@ -148,8 +149,8 @@ const Header = ({ headerData }: HeaderProps) => {
                   </AnimatePresence>
                 </>
               ) : (
-                <Link 
-                  href={item.url} 
+                <Link
+                  href={item.url}
                   className='hover:text-gray-300 transition-colors'
                 >
                   {item.label}
@@ -176,16 +177,21 @@ const Header = ({ headerData }: HeaderProps) => {
           initial={{ opacity: 0, x: 10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.15, duration: 0.3 }}
-          className='hidden lg:flex flex-col gap-0'
+          className='hidden lg:flex flex-col gap-1'
         >
           <h5 className='links'>
             <a href={`tel:${contactInfo.phoneNumber}`} className='hover:underline'>
               {contactInfo.phoneNumber}
             </a>
           </h5>
-          <h4 className='font-normal lg:text-[20px] text-[18px] font-archivo-black text-white'>
+          <Button
+            onClick={() => {
+              window.location.hash = "#contact";
+            }}
+            className='font-normal lg:text-[20px] text-[18px] font-archivo-black rounded-full bg-white text-black hover:bg-white hover:opacity-80 cursor-pointer'
+          >
             {contactInfo.consultantText}
-          </h4>
+          </Button>
         </motion.div>
 
         {/* Mobile Menu Button - Visible only on Mobile */}
@@ -206,7 +212,7 @@ const Header = ({ headerData }: HeaderProps) => {
         {/* Backdrop */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div 
+            <motion.div
               className='lg:hidden fixed inset-0 bg-black/50 z-40'
               onClick={toggleMenu}
               initial="hidden"
@@ -238,7 +244,7 @@ const Header = ({ headerData }: HeaderProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05, duration: 0.18 }}
               >
-                <button 
+                <button
                   onClick={toggleMenu}
                   className='text-white hover:text-gray-300 transition-colors'
                   aria-label='Close menu'
@@ -256,20 +262,20 @@ const Header = ({ headerData }: HeaderProps) => {
               >
                 <Link href="/" onClick={toggleMenu}>
                   {logo ? (
-                    <Image 
-                      src={getFileUrl(logo)} 
-                      alt="logo" 
-                      height={100} 
-                      width={100} 
-                      className='w-[160px] h-auto' 
+                    <Image
+                      src={getFileUrl(logo)}
+                      alt="logo"
+                      height={100}
+                      width={100}
+                      className='w-[160px] h-auto'
                     />
                   ) : (
-                    <Image 
-                      src="/logo.svg" 
-                      alt="logo" 
-                      height={100} 
-                      width={100} 
-                      className='w-[160px] h-auto' 
+                    <Image
+                      src="/logo.svg"
+                      alt="logo"
+                      height={100}
+                      width={100}
+                      className='w-[160px] h-auto'
                     />
                   )}
                 </Link>
@@ -355,8 +361,8 @@ const Header = ({ headerData }: HeaderProps) => {
                           </AnimatePresence>
                         </>
                       ) : (
-                        <Link 
-                          href={item.url} 
+                        <Link
+                          href={item.url}
                           onClick={toggleMenu}
                           className='py-3 border-b border-white/30 hover:border-white transition-colors text-white hover:text-gray-300 block'
                         >
@@ -379,9 +385,15 @@ const Header = ({ headerData }: HeaderProps) => {
                       {contactInfo.phoneNumber}
                     </a>
                   </h5>
-                  <h4 className='font-normal text-sm font-archivo-black text-white'>
+                  <Button
+                    onClick={() => {
+                      window.location.href = "#contact";
+                      setIsMenuOpen(false);
+                    }}
+                    className='font-normal text-sm font-archivo-black text-black bg-white rounded-full hover:bg-white hover:opacity-80'
+                  >
                     {contactInfo.consultantText}
-                  </h4>
+                  </Button>
                 </motion.div>
               </motion.nav>
             </motion.div>

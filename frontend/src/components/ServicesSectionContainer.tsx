@@ -13,9 +13,9 @@ export default async function ServicesSectionContainer() {
       servicesList[] {
         _key,
         title,
+        description,
         url,
         icon,
-        image,
         order
       } | order(order asc)
     }`

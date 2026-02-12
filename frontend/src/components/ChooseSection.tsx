@@ -88,8 +88,8 @@ const ChooseSection = ({ chooseData }: ChooseSectionProps) => {
   return (
     <section className='md:py-[12vh] py-[8vh]'>
       <div>
-        <div className='w-full max-w-[689px] px-4 xl:px-10 mx-auto mb-[4.3vh]'>
-          <h2 className='font-normal font-archivo-black text-center'>
+        <div className='w-full px-4 xl:px-10 mx-auto mb-[4.3vh] max-w-[1480px]'>
+          <h2 className='font-normal font-archivo-black'>
             {heading}
           </h2>
         </div>

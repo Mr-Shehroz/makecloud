@@ -6,6 +6,18 @@ export default defineType({
   title: 'Hero Section',
   type: 'document',
   fields: [
+    // Make Cloud Logo (single image field)
+    defineField({
+      name: 'cloudLogo',
+      title: 'Make Cloud Logo',
+      type: 'file',
+      options: {
+        accept: 'image/svg+xml,image/png,image/jpeg,image/webp',
+      },
+      description: 'Upload the Make Cloud logo image (e.g., for hero section).',
+      validation: (Rule) => Rule.required(),
+    }),
+
     // Partner Logos
     defineField({
       name: 'logos',

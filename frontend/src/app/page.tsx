@@ -7,22 +7,37 @@ import MarqueeContainer from '@/components/MarqueeContainer'
 import PartnersSectionContainer from '@/components/PartnersSectionContainer'
 import ServicesSectionContainer from '@/components/ServicesSectionContainer'
 import TrustedSectionContainer from '@/components/TrustedSectionContainer'
-import React from 'react'
 
-const Home = () => {
+import { getHomePage } from '@/sanity/getHomePage'
+
+export default async function Home() {
+  const data = await getHomePage()
+
+  // ⭐ filter nulls (VERY IMPORTANT)
+  const sections = (data?.sections || []).filter(Boolean)
+
+  const componentsMap: Record<string, React.ReactNode> = {
+    hero: <HeroSectionContainer />,
+    services: <ServicesSectionContainer />,
+    partners: <PartnersSectionContainer />,
+    choose: <ChooseSectionContainer />,
+    marquee: <MarqueeContainer />,
+    features: <FeaturesSectionContainer />,
+    trusted: <TrustedSectionContainer />,
+    blogs: <BlogsSectionContainer />,
+    contacts: <ContactsSectionContainer />,
+  }
+
   return (
     <div>
-      <HeroSectionContainer />
-      <ServicesSectionContainer />
-      <PartnersSectionContainer />
-      <ChooseSectionContainer />
-      <MarqueeContainer />
-      <FeaturesSectionContainer />
-      <TrustedSectionContainer />
-      <BlogsSectionContainer />
-      <ContactsSectionContainer />
+      {sections.map((section: { _type: string }, i: number) => {
+        const Component = componentsMap[section?._type]
+
+        // ⭐ extra safety
+        if (!Component) return null
+
+        return <div key={i}>{Component}</div>
+      })}
     </div>
   )
 }
-
-export default Home

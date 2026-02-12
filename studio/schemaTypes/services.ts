@@ -34,6 +34,11 @@ export default defineType({
               validation: (Rule) => Rule.required().min(3).max(80),
             }),
             defineField({
+              name: 'description',
+              title: 'Service Description',
+              type: 'string',
+            }),
+            defineField({
               name: 'url',
               title: 'Service URL',
               type: 'string',
@@ -48,16 +53,6 @@ export default defineType({
                 accept: 'image/svg+xml,image/png,image/jpeg,image/webp',
               },
               description: 'Top-left icon (services-icon-1.svg, etc.)',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'image',
-              title: 'Service Image',
-              type: 'file',
-              options: {
-                accept: 'image/png,image/jpeg,image/webp',
-              },
-              description: 'Main service image (services-1.png, etc.)',
               validation: (Rule) => Rule.required(),
             }),
             defineField({

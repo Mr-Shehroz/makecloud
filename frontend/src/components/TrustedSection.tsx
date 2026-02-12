@@ -24,7 +24,7 @@ const TrustedSection = ({ trustedData }: TrustedSectionProps) => {
     <section className=''>
       <div className='max-w-[1480px] mx-auto px-4 xl:px-10 lg:mt-[10.8vh] md:pb-0 py-[6vh]'>
         <div className='mb-12'>
-          <h2 className='font-normal font-archivo-black text-center'>
+          <h2 className='font-normal font-archivo-black'>
             {heading}
           </h2>
         </div>

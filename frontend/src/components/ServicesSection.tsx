@@ -9,10 +9,10 @@ interface ServicesSectionProps {
   servicesData: ServicesData | null
 }
 
-// Only entrance (mount) animation, not hover, and only supported values for transition
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.18, delayChildren: 0.15 } }
+  visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.14, delayChildren: 0.10 } }
 } as const
 
 const cardVariants = {
@@ -22,22 +22,12 @@ const cardVariants = {
 
 const iconVariants = {
   hidden: { scale: 0.7, opacity: 0, rotate: -15 },
-  visible: { scale: 1, opacity: 1, rotate: 0, transition: { delay: 0.1, type: 'spring' as const, stiffness: 300 } }
+  visible: { scale: 1, opacity: 1, rotate: 0, transition: { delay: 0.07, type: 'spring' as const, stiffness: 300 } }
 } as const
 
-const arrowVariants = {
-  hidden: { scale: 0.7, opacity: 0, rotate: 15 },
-  visible: { scale: 1, opacity: 1, rotate: 0, transition: { delay: 0.18, type: 'spring' as const, stiffness: 300 } }
-} as const
-
-const imageVariants = {
-  hidden: { scale: 0.95, opacity: 0 },
-  visible: { scale: 1, opacity: 1, transition: { delay: 0.14, type: 'spring' as const, stiffness: 80 } }
-} as const
-
-const titleVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { delay: 0.22, type: 'spring' as const, stiffness: 100 } }
+const contentVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.13, type: 'spring' as const, stiffness: 100 } }
 } as const
 
 const headingVariants = {
@@ -48,7 +38,7 @@ const headingVariants = {
 const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
   if (!servicesData) return null
 
-  const { heading, servicesList = [] } = servicesData
+  const { heading, servicesList = [], description } = servicesData
 
   return (
     <motion.section
@@ -59,9 +49,9 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
       viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
     >
       <motion.div>
-        <motion.div className='md:w-[800px] md:mx-auto'>
+        <motion.div className='md:w-[800px]'>
           <motion.h2
-            className='font-normal font-archivo-black text-center'
+            className='font-normal font-archivo-black'
             variants={headingVariants}
             initial="hidden"
             whileInView="visible"
@@ -70,67 +60,86 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
             {heading}
           </motion.h2>
         </motion.div>
+        {/* Section description if present */}
+        {description && (
+          <motion.div
+            className='md:w-[700px] mx-auto mt-2 mb-3'
+            variants={contentVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-20% 0px -20% 0px' }}
+          >
+            <p className='font-archivo text-[1.12rem] text-center text-black/80'>
+              {description}
+            </p>
+          </motion.div>
+        )}
         <motion.div
-          className='lg:flex lg:justify-center lg:items-center grid md:grid-cols-2 grid-cols-1 gap-5 mt-[4vh]'
+          className='lg:flex lg:justify-center 2xl:items-center grid md:grid-cols-2 grid-cols-1 2xl:gap-7 gap-5 mt-[4vh]'
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
         >
           <AnimatePresence>
-            {servicesList.map((service) => (
-              <motion.div
-                key={service._key}
-                className='md:w-[335px] h-auto rounded-[22px] relative group cursor-pointer'
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
-              >
-                {/* Top-left icon */}
+            {servicesList
+              .slice()
+              .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
+              .map((service) => (
                 <motion.div
-                  className='bg-[#E53023] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute left-0 top-0 flex justify-center items-center z-10'
-                  variants={iconVariants}
+                  key={service._key}
+                  className='md:w-[350px] min-h-[280px] h-auto rounded-[24px] bg-white/95 shadow-lg border border-[#ececec] flex flex-col items-center py-8 px-2 group transition-transform duration-300 hover:-translate-y-2'
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-18% 0px -18% 0px' }}
                 >
-                  {/* This image no hover motion (just entrance) */}
-                  <img 
-                    src={getFileUrl(service.icon)} 
-                    alt="icon" 
-                    className='xl:w-[25px] lg:w-[20px] w-[25px] h-auto' 
-                  />
+                  {/* Icon top, centered */}
+                  <motion.div
+                    className='flex justify-center items-center w-20 h-20 rounded-full hero shadow-md border mb-5'
+                    variants={iconVariants}
+                  >
+                    <img
+                      src={getFileUrl(service.icon)}
+                      alt="icon"
+                      className='w-[42px] h-[42px] object-contain'
+                    />
+                  </motion.div>
+
+                  {/* Title */}
+                  <motion.div
+                    className='flex flex-col items-center px-2 pt-1 pb-0 flex-1 w-full'
+                    variants={contentVariants}
+                  >
+                    <h4 className='font-archivo-black font-bold text-[1.28rem] text-center text-black relative z-50'>
+                      {service.title}
+                    </h4>
+                  </motion.div>
+                  
+                  {/* Description */}
+                  {service.description && (
+                    <motion.div
+                      className='flex flex-col items-center px-2 pt-1 pb-4 flex-1 w-full'
+                      variants={contentVariants}
+                    >
+                      <p className='font-archivo text-[1rem] text-center text-black relative z-50 mb-2 mt-[6px]'>
+                        {service.description}
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {/* Learn More link */}
+                  <div className="w-full flex flex-col items-center justify-end mt-auto">
+                    <Link
+                      href={service.url}
+                      className='inline-flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-[#345CA7] border border-[#345CA7] bg-white hover:bg-[#345CA7] hover:text-white transition-colors duration-200 text-sm shadow-sm mt-2'
+                    >
+                      Learn more
+                      <img src="/arrow.svg" alt="arrow" className="ml-1 w-4 h-4" style={{ filter: 'invert(31%) sepia(69%) saturate(589%) hue-rotate(185deg)' }} />
+                    </Link>
+                  </div>
                 </motion.div>
-                
-                {/* Bottom-right arrow link */}
-                <Link 
-                  href={service.url}
-                  className='bg-[#345CA7] xl:w-12 xl:h-12 lg:w-9 lg:h-9 w-12 h-12 rounded-full absolute right-0 bottom-0 flex justify-center items-center group-hover:bg-[#E53023] hover:bg-[#E53023] transition-all duration-300 z-10'
-                >
-                  <motion.img 
-                    src="/arrow.svg" 
-                    alt="arrow"
-                    className='xl:w-[12px] lg:w-[9px] w-[12px] h-auto'
-                    variants={arrowVariants}
-                  />
-                </Link>
-                
-                {/* Main service image */}
-                <motion.img 
-                  src={getFileUrl(service.image)} 
-                  alt={service.title} 
-                  className='w-full h-auto rounded-[22px] transition-transform duration-500 group-hover:scale-105' 
-                  variants={imageVariants}
-                  style={{ zIndex: 1 }}
-                />
-                
-                {/* Service title */}
-                <motion.h4
-                  className='font-normal font-archivo-black services absolute bottom-[11%] pr-8 md:pr-0 transition-colors duration-300 group-hover:text-[#345CA7] z-10'
-                  variants={titleVariants}
-                >
-                  {service.title}
-                </motion.h4>
-              </motion.div>
-            ))}
+              ))}
           </AnimatePresence>
         </motion.div>
       </motion.div>

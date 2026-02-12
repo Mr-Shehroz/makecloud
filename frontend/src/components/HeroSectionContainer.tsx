@@ -19,6 +19,7 @@ export default async function HeroSectionContainer() {
       subheading,
       ctaButton {
         text,
+        cloudLogo,
         url,
         openInNewTab
       }

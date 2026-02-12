@@ -42,11 +42,11 @@ const PartnersSection = ({ partnersData }: PartnersSectionProps) => {
         variants={fadeIn}
       >
         <motion.div 
-          className='md:w-[633px] md:mx-auto'
+          className='xl:px-10 px-4'
           variants={itemVariant}
         >
           <motion.h2
-            className='font-normal font-archivo-black text-center'
+            className='font-normal font-archivo-black'
             variants={itemVariant}
           >
             {heading}

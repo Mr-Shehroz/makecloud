@@ -9,7 +9,19 @@ import trusted from './trusted'
 import blogs from './blogs'
 import contacts from './contacts'
 import footer from './footer'
+import homePage from './homePage'
 
-
-
-export const schemaTypes = [header, hero, services, partners, choose, marquee, features, trusted, blogs, contacts, footer];
+export const schemaTypes = [
+  header,
+  hero,
+  services,
+  partners,
+  choose,
+  marquee,
+  features,
+  trusted,
+  blogs,
+  contacts,
+  footer,
+  homePage, // ⭐ MUST ADD
+]

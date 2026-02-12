@@ -1,4 +1,4 @@
-import { Archivo_Black, DM_Sans, Roboto } from "next/font/google";
+import { Archivo, DM_Sans, Roboto } from "next/font/google";
 import "./globals.css";
 import FooterSectionContainer from "@/components/FooterSectionContainer";
 import HeaderContainer from "@/components/HeaderContainer";
@@ -8,10 +8,10 @@ const roboto = Roboto({
 	subsets: ["latin"],
 	weight: ["400","500","600","700","900"]
 });
-const archivo_black = Archivo_Black({
+const archivo_black = Archivo({
 	variable: "--font-archivo-black",
 	subsets: ["latin"],
-	weight: ["400"]
+	weight: ["600"]
 });
 const dm_sans = DM_Sans({
 	variable: "--font-dm-sans",

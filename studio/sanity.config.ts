@@ -6,25 +6,21 @@ import { codeInput } from "@sanity/code-input";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { structure } from './structure';
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID!;
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "yk6vsu9p";
 const dataset = process.env.SANITY_STUDIO_DATASET || "production";
 
-if (!projectId) {
-  throw new Error("Missing SANITY_STUDIO_PROJECT_ID environment variable");
-}
-
 export default defineConfig({ 
-  name: "default",
-  title: "Sane Kit Studio",
-  projectId,
-  dataset,
-  plugins: [
-    structureTool({ structure }),
-    visionTool(),
-    codeInput(),
-    unsplashImageAsset(),
-  ],
-  schema: {
-    types: schemaTypes,
-  },
+	name: "default",
+	title: "Sane Kit Studio",
+	projectId,
+	dataset,
+	plugins: [
+		structureTool({ structure }),
+		visionTool(),
+		codeInput(),
+		unsplashImageAsset(),
+	],
+	schema: {
+		types: schemaTypes,
+	},
 });
