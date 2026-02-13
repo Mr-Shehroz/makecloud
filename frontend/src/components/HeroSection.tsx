@@ -78,7 +78,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
             {heading}
           </motion.h1>
           <motion.p
-            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[22px] font-normal leading-[100%] mt-[1.5vh] text-black'
+            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[25px] leading-[35px] font-normal md:leading-[100%] mt-[1.5vh] text-black'
             variants={itemAnim}
           >
             {subheading}
