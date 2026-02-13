@@ -60,7 +60,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
             key="cloud-logo"
             src={getFileUrl(partnersLogo)} 
             alt="PartnersLogo"
-            className='2xl:w-[453px] xl:w-[400px] lg:w-[350px] md:w-[300px] w-[250px] h-auto pb-[5vh] md:pb-0'
+            className='2xl:w-[453px] xl:w-[400px] lg:w-[350px] md:w-[300px] w-full h-auto pb-[5vh] md:pb-0'
             variants={logoAnim}
             style={{}}
           />
@@ -78,7 +78,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
             {heading}
           </motion.h1>
           <motion.p
-            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[16px] font-normal leading-[100%] mt-[1.5vh] text-black'
+            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[18px] font-normal leading-[100%] mt-[1.5vh] text-black'
             variants={itemAnim}
           >
             {subheading}
