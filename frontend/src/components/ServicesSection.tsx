@@ -115,7 +115,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
                       {service.title}
                     </h4>
                   </motion.div>
-                  
+
                   {/* Description */}
                   {service.description && (
                     <motion.div
@@ -132,10 +132,14 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
                   <div className="w-full flex flex-col items-center justify-end mt-auto">
                     <Link
                       href={service.url}
-                      className='inline-flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-[#345CA7] border border-[#345CA7] bg-white hover:bg-[#345CA7] hover:text-white transition-colors duration-200 text-sm shadow-sm mt-2'
+                      className='inline-flex items-center gap-2 px-5 py-2 rounded-full font-semibold text-white bg-[#345CA7] hover:opacity-90 transition-colors duration-300 text-sm shadow-sm mt-2'
                     >
                       Learn more
-                      <img src="/arrow.svg" alt="arrow" className="ml-1 w-4 h-4" style={{ filter: 'invert(31%) sepia(69%) saturate(589%) hue-rotate(185deg)' }} />
+                      <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M0.59375 10.6899L10.571 0.712646" stroke="white" stroke-width="1.18777" stroke-miterlimit="10" stroke-linecap="round"></path>
+                        <path d="M0.712891 0.593872H10.6901" stroke="white" stroke-width="1.18777" stroke-miterlimit="10"></path>
+                        <path d="M10.6895 10.5711V0.593872" stroke="white" stroke-width="1.18777" stroke-miterlimit="10"></path>
+                      </svg>
                     </Link>
                   </div>
                 </motion.div>
