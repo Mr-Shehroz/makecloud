@@ -37,7 +37,7 @@ const buttonAnim = {
 const HeroSection = ({ heroData }: HeroSectionProps) => {
   if (!heroData) return null
 
-  const { logos = [], heading, subheading, ctaButton } = heroData
+  const { partnersLogo, heading, subheading, ctaButton } = heroData
 
   return (
     <motion.section
@@ -58,31 +58,12 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
           {/* Cloud Logo */}
           <motion.img
             key="cloud-logo"
-            // src={getFileUrl(cloudLogo)}
-            src="/favicon.svg"
-            alt="Make Cloud Logo"
-            className='2xl:w-[90px] xl:w-[70px] md:w-[60px] w-[45px] h-auto hero p-3 rounded-xl'
+            src={getFileUrl(partnersLogo)} 
+            alt="PartnersLogo"
+            className='2xl:w-[453px] xl:w-[400px] lg:w-[350px] md:w-[300px] w-[250px] h-auto pb-[5vh] md:pb-0'
             variants={logoAnim}
             style={{}}
           />
-          {/* Vertical Divider */}
-          <div className="h-[46px] w-[2px] bg-[#E4E8F0] mx-3 rounded-full" />
-          {/* Partner Logos */}
-          <div className="flex items-center gap-6 xl:gap-9">
-            {logos
-              .slice()
-              .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
-              .map((logo) => (
-                <motion.img 
-                  key={logo._key}
-                  src={getFileUrl(logo.logo)}
-                  alt={logo.alt}
-                  className='2xl:w-[70px] xl:w-[60px] md:w-[55px] w-[40px] h-auto'
-                  variants={logoAnim}
-                  style={{}}
-                />
-              ))}
-          </div>
         </motion.div>
 
         {/* Hero Content */}
@@ -91,7 +72,7 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
           variants={parentAnim}
         >
           <motion.h1
-            className='font-archivo-black 2xl:text-[77px] xl:text-[65px] lg:text-[56px] md:text-[48px] text-[36px] leading-[100%] font-normal capitalize text-black'
+            className='font-archivo-black 2xl:text-[77px] xl:text-[65px] lg:text-[56px] md:text-[48px] text-[36px] leading-[100%] font-normal text-black'
             variants={itemAnim}
           >
             {heading}
