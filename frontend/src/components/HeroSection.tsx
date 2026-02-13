@@ -72,13 +72,13 @@ const HeroSection = ({ heroData }: HeroSectionProps) => {
           variants={parentAnim}
         >
           <motion.h1
-            className='font-archivo-black 2xl:text-[77px] xl:text-[65px] lg:text-[56px] md:text-[48px] text-[36px] leading-[100%] font-normal text-black'
+            className='font-archivo-black 2xl:text-[77px] xl:text-[65px] lg:text-[56px] text-[48px] leading-[100%] font-normal text-black'
             variants={itemAnim}
           >
             {heading}
           </motion.h1>
           <motion.p
-            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[18px] font-normal leading-[100%] mt-[1.5vh] text-black'
+            className='font-roboto 2xl:text-[27px] xl:text-[24px] lg:text-[22px] md:text-[20px] text-[22px] font-normal leading-[100%] mt-[1.5vh] text-black'
             variants={itemAnim}
           >
             {subheading}
