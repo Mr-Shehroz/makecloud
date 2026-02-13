@@ -1,19 +1,4 @@
-// types/hero.ts
-
-// Hero Logo Type
-export interface HeroLogo {
-  _key: string
-  alt: string
-  logo: {
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-  }
-  order: number
-}
-
-export interface CloudLogo {
+export interface PartnersLogo {
   asset: {
     _ref: string
     _type: 'reference'
@@ -31,8 +16,7 @@ export interface CtaButton {
 export interface HeroData {
   _id: string
   _type: 'hero'
-  cloudLogo: CloudLogo
-  logos: HeroLogo[]
+  partnersLogo: PartnersLogo
   heading: string
   subheading: string
   ctaButton: CtaButton
