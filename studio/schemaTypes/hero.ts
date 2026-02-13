@@ -8,51 +8,14 @@ export default defineType({
   fields: [
     // Make Cloud Logo (single image field)
     defineField({
-      name: 'cloudLogo',
-      title: 'Make Cloud Logo',
+      name: 'partnersLogo',
+      title: 'Partners Logo',
       type: 'file',
       options: {
         accept: 'image/svg+xml,image/png,image/jpeg,image/webp',
       },
-      description: 'Upload the Make Cloud logo image (e.g., for hero section).',
+      description: 'Upload the Partners logo image (e.g., for hero section).',
       validation: (Rule) => Rule.required(),
-    }),
-
-    // Partner Logos
-    defineField({
-      name: 'logos',
-      title: 'Partner Logos',
-      type: 'array',
-      description: 'Upload 3 partner logos (AWS, Baytech, Console)',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'alt',
-              title: 'Alt Text',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'logo',
-              title: 'Logo File',
-              type: 'file',
-              options: {
-                accept: 'image/svg+xml,image/png,image/jpeg,image/webp',
-              },
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'order',
-              title: 'Display Order (1, 2, 3)',
-              type: 'number',
-              validation: (Rule) => Rule.required().min(1).max(3).integer(),
-            }),
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.max(3),
     }),
 
     // Main Heading
