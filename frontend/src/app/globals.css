@@ -156,8 +156,7 @@ header,
 h2 {
   line-height: 100%;
   color: black;
-  font-weight: 900;
-  text-transform: capitalize;
+  font-weight: 600;
 }
 
 /* Pagination dot styles */
