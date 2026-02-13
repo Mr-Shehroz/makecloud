@@ -46,7 +46,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
       className='md:my-[10.6vh] my-[8vh] max-w-[1480px] mx-auto px-4 xl:px-10'
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
+      viewport={{ once: true, margin: '0% 0px 0% 0px' }}
     >
       <motion.div>
         <motion.div className='md:w-[800px]'>
@@ -55,7 +55,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
             variants={headingVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
+            viewport={{ once: true, margin: '0% 0px 0% 0px' }}
           >
             {heading}
           </motion.h2>
@@ -67,7 +67,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
             variants={contentVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-20% 0px -20% 0px' }}
+            viewport={{ once: true, margin: '0% 0px 0% 0px' }}
           >
             <p className='font-archivo text-[1.12rem] text-center text-black/80'>
               {description}
@@ -79,7 +79,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-24% 0px -24% 0px' }}
+          viewport={{ once: true, margin: '0% 0px 0% 0px' }}
         >
           <AnimatePresence>
             {servicesList
@@ -92,7 +92,7 @@ const ServicesSection = ({ servicesData }: ServicesSectionProps) => {
                   variants={cardVariants}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: '-18% 0px -18% 0px' }}
+                  viewport={{ once: true, margin: '0% 0px 0% 0px' }}
                 >
                   {/* Icon top, centered */}
                   <motion.div
