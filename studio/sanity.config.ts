@@ -6,14 +6,15 @@ import { codeInput } from "@sanity/code-input";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { structure } from './structure';
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "yk6vsu9p";
-const dataset = process.env.SANITY_STUDIO_DATASET || "production";
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || process.env.SANITY_STUDIO_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || process.env.SANITY_STUDIO_DATASET || "production";
 
 export default defineConfig({ 
 	name: "default",
 	title: "Sane Kit Studio",
-	projectId,
-	dataset,
+	projectId: projectId as string,
+	dataset: dataset as string,
+	basePath: '/studio',
 	plugins: [
 		structureTool({ structure }),
 		visionTool(),
