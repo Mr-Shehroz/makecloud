@@ -7,8 +7,8 @@
 
 import { defineCliConfig } from "sanity/cli";
 
-const projectIdFromEnv = process.env.SANITY_STUDIO_PROJECT_ID;
-const datasetFromEnv = process.env.SANITY_STUDIO_DATASET;
+const projectIdFromEnv = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const datasetFromEnv = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
 if (!projectIdFromEnv) {
   throw new Error("The SANITY_STUDIO_PROJECT_ID environment variable is missing or empty. Please set it in your environment.");
