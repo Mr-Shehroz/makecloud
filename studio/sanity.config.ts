@@ -14,6 +14,7 @@ export default defineConfig({
 	title: "Sane Kit Studio",
 	projectId,
 	dataset,
+	basePath: "/studio",
 	plugins: [
 		structureTool({ structure }),
 		visionTool(),
