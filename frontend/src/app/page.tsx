@@ -1,3 +1,6 @@
+// app/page.tsx
+export const revalidate = 0 // Always fetch fresh data, never use static cache
+
 import BlogsSectionContainer from '@/components/BlogsSectionContainer'
 import ChooseSectionContainer from '@/components/ChooseSectionContainer'
 import ContactsSectionContainer from '@/components/ContactsSectionContainer'
@@ -13,7 +16,6 @@ import { getHomePage } from '@/sanity/getHomePage'
 export default async function Home() {
   const data = await getHomePage()
 
-  // ⭐ filter nulls (VERY IMPORTANT)
   const sections = (data?.sections || []).filter(Boolean)
 
   const componentsMap: Record<string, React.ReactNode> = {
@@ -33,7 +35,6 @@ export default async function Home() {
       {sections.map((section: { _type: string }, i: number) => {
         const Component = componentsMap[section?._type]
 
-        // ⭐ extra safety
         if (!Component) return null
 
         return <div key={i}>{Component}</div>

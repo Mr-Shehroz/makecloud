@@ -6,8 +6,8 @@ import { codeInput } from "@sanity/code-input";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { structure } from '../studio/structure';
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "yk6vsu9p";
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 
 export default defineConfig({ 
 	name: "default",
